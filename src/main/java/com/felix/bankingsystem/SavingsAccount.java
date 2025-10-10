@@ -17,4 +17,9 @@ public class SavingsAccount extends Account implements InterestCalculation{
         double interest = calculateInterest(balance);
         deposit(interest);
     }
+
+    @Override
+    public void withdraw(double amount) {
+        System.out.println("Withdrawal is not allwoed for a Savings Account");
+    }
 }
