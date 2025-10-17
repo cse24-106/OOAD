@@ -1,6 +1,6 @@
-package com.felix.bankingsystem;
+package com.felix.bankingsystem.model;
 
-public class InvestmentAccount extends Account implements InterestPayable{
+public class InvestmentAccount extends Account implements InterestPayable {
     private double interestRate = 0.05;
 
     public InvestmentAccount(String accountNumber, Customer customer) {

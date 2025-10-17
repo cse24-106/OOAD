@@ -1,4 +1,4 @@
-package com.felix.bankingsystem;
+package com.felix.bankingsystem.model;
 
 public class CompanySavingsInterest implements InterestCalculation{
     @Override

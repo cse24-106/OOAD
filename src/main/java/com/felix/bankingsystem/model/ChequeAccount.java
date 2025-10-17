@@ -1,4 +1,4 @@
-package com.felix.bankingsystem;
+package com.felix.bankingsystem.model;
 
 public class ChequeAccount extends Account {
     private String employer;

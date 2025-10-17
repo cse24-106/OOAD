@@ -1,6 +1,6 @@
-package com.felix.bankingsystem;
+package com.felix.bankingsystem.model;
 
-public class SavingsAccount extends Account implements InterestCalculation{
+public class SavingsAccount extends Account implements InterestCalculation {
     private InterestCalculation interestRate;
 
     public SavingsAccount(String accountNumber, Customer customer, InterestCalculation interestRate) {
