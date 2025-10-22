@@ -4,6 +4,8 @@ import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.model.Account;
 import com.felix.bankingsystem.model.Transaction;
 import com.felix.bankingsystem.controller.BankService;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -77,11 +79,17 @@ public class TransactionHistoryController {
     }
 
     private void setupTableColumns() {
-        Dash_tranTable_tranID.setCellValueFactory(cellData -> cellData.getValue().transactionIdProperty());
-        Dash_tranTable_date.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        Dash_tranTable_type.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
-        Dash_tranTable_amount.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
-        Dash_tranTable_balance_after.setCellValueFactory(cellData -> cellData.getValue().balanceAfterProperty().asObject());
+        // Transactions table
+        Dash_tranTable_tranID.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTransactionID()));
+        Dash_tranTable_date.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDate().toString()));
+        Dash_tranTable_type.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getType()));
+        Dash_tranTable_amount.setCellValueFactory(cellData ->
+                new SimpleDoubleProperty(cellData.getValue().getAmount()).asObject());
+        Dash_tranTable_balance_after.setCellValueFactory(cellData ->
+                new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
     private void setupButtonActions() {

@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 import java.io.IOException;
 import java.util.List;
@@ -87,15 +89,22 @@ public class DashboardController {
 
     private void setupTableColumns() {
         // Accounts table
-        Dash_accTable_accNum.setCellValueFactory(cellData -> cellData.getValue().accountNumberProperty());
-        Dash_accTable_available_balance.setCellValueFactory(cellData -> cellData.getValue().balanceProperty().asObject());
+        Dash_accTable_accNum.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getAccountNumber()));
+        Dash_accTable_available_balance.setCellValueFactory(cellData ->
+                new SimpleDoubleProperty(cellData.getValue().getBalance()).asObject());
 
         // Transactions table
-        Dash_tranTable_tranID.setCellValueFactory(cellData -> cellData.getValue().transactionIdProperty());
-        Dash_tranTable_date.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        Dash_tranTable_type.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
-        Dash_tranTable_amount.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
-        Dash_tranTable_balance_after.setCellValueFactory(cellData -> cellData.getValue().balanceAfterProperty().asObject());
+        Dash_tranTable_tranID.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTransactionID()));
+        Dash_tranTable_date.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDate().toString()));
+        Dash_tranTable_type.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getType()));
+        Dash_tranTable_amount.setCellValueFactory(cellData ->
+                new SimpleDoubleProperty(cellData.getValue().getAmount()).asObject());
+        Dash_tranTable_balance_after.setCellValueFactory(cellData ->
+                new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
     private void setupButtonActions() {
@@ -109,24 +118,23 @@ public class DashboardController {
     }
 
     private void updateDashboard() {
-        if (customer != null) {
-            // Calculate total balance
-            double totalBalance = customer.getAccounts().stream()
-                    .mapToDouble(Account::getBalance)
-                    .sum();
-            Available_balance.setText(String.format("P%.2f", totalBalance));
+        if (customer == null) return;
 
-            // Update accounts table
-            Dash_accounts_table.getItems().setAll(customer.getAccounts());
+        // Update account table
+        List<Account> accounts = customer.getAccounts();
+        Dash_accounts_table.getItems().setAll(accounts);
 
-            // Update transactions table (get all transactions from all accounts)
-            List<Transaction> allTransactions = customer.getAccounts().stream()
-                    .flatMap(account -> account.getTransactions().stream())
-                    .sorted((t1, t2) -> t2.getDate().compareTo(t1.getDate()))
-                    .limit(10) // Show only last 10 transactions
-                    .toList();
-            Dash_transactions_table.getItems().setAll(allTransactions);
-        }
+        // Calculate total available balance
+        double totalBalance = accounts.stream()
+                .mapToDouble(Account::getBalance)
+                .sum();
+        Available_balance.setText(String.format("P%.2f", totalBalance));
+
+        // Update transaction table
+        List<Transaction> transactions = accounts.stream()
+                .flatMap(acc -> acc.getTransactions().stream())
+                .toList();
+        Dash_transactions_table.getItems().setAll(transactions);
     }
 
     private void showDashboard() {

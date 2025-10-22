@@ -93,12 +93,6 @@ public class WithdrawController {
             if (!customer.getAccounts().isEmpty()) {
                 selectedAccount = customer.getAccounts().get(0);
 
-                // Check if account allows withdrawals
-                if (!selectedAccount.canWithdraw()) {
-                    showAlert("Error", "This account type does not allow withdrawals");
-                    return;
-                }
-
                 // Check sufficient balance
                 if (selectedAccount.getBalance() < amount) {
                     showAlert("Error", "Insufficient funds");
@@ -108,14 +102,12 @@ public class WithdrawController {
                 // Create transaction
                 Transaction transaction = new Transaction(
                         "T" + System.currentTimeMillis(),
-                        LocalDateTime.now(),
                         "WITHDRAWAL",
-                        -amount,
+                        amount,
                         selectedAccount.getBalance() - amount
                 );
 
                 // Update account balance
-                selectedAccount.withdraw(amount);
                 selectedAccount.addTransaction(transaction);
 
                 showAlert("Success", String.format("Withdrawn P%.2f successfully", amount));

@@ -1,10 +1,21 @@
 package com.felix.bankingsystem.model;
 
-public class InvestmentAccount extends Account implements InterestPayable {
-    private double interestRate = 0.05;
+import javafx.beans.value.ObservableValue;
 
-    public InvestmentAccount(String accountNumber, Customer customer) {
+public class InvestmentAccount extends Account implements InterestPayable, Withdraw {
+    private double interestRate = 0.05;
+    private static final double MIN_INITIAL_DEPOSIT = 500.00;
+
+    public InvestmentAccount(String accountNumber, Customer customer, double initialDeposit) {
         super(accountNumber, customer);
+
+        if (initialDeposit < MIN_INITIAL_DEPOSIT) {
+            throw new IllegalArgumentException(
+                    "Initial deposit for Investment Account must be at least P500.00."
+            );
+        } else {
+            this.balance = initialDeposit;
+        }
     }
 
     @Override
@@ -16,5 +27,17 @@ public class InvestmentAccount extends Account implements InterestPayable {
     public void applyInterest(){
         double interest = calculateInterest();
         deposit(interest);
+    }
+
+    @Override
+    public void Withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+        }
+    }
+
+    @Override
+    public ObservableValue<String> accountNumberProperty() {
+        return null;
     }
 }

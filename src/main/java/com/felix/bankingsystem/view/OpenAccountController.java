@@ -79,19 +79,19 @@ public class OpenAccountController {
             switch (accountType) {
                 case "Savings Account":
                     SavingsAccount savingsAccount = new SavingsAccount(
-                            generateAccountNumber(), 0.0, customer, "Main Branch");
+                            generateAccountNumber(), 50.0, customer);
                     customer.addAccount(savingsAccount);
                     break;
 
                 case "Investment Account":
                     InvestmentAccount investmentAccount = new InvestmentAccount(
-                            generateAccountNumber(), 500.0, customer, "Main Branch");
+                                                generateAccountNumber(), customer, 500.0);
                     customer.addAccount(investmentAccount);
                     break;
 
                 case "Cheque Account":
                     ChequeAccount chequeAccount = new ChequeAccount(
-                            generateAccountNumber(), 0.0, customer, "Main Branch",
+                            generateAccountNumber(), 0.0, customer,
                             "N/A", "N/A"); // You might want to collect company info
                     customer.addAccount(chequeAccount);
                     break;

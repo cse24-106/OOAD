@@ -60,6 +60,12 @@ public class PersonalDetailsController {
     @FXML
     private Button withdraw_btn;
 
+    @FXML
+    private TextField source_of_funds_txt;
+
+    @FXML
+    private TextField conatct_person_txt;
+
     private Customer customer;
     private BankService bankService;
 
@@ -96,6 +102,8 @@ public class PersonalDetailsController {
         address_txt.setEditable(false);
         number_txt.setEditable(false);
         email_txt.setEditable(false);
+        source_of_funds_txt.setEditable(false);
+        conatct_person_txt.setEditable(false);
     }
 
     private void updateView() {
@@ -117,6 +125,9 @@ public class PersonalDetailsController {
                 address_txt.setText(indCustomer.getAddress());
                 number_txt.setText(indCustomer.getPhoneNumber());
                 email_txt.setText(indCustomer.getEmail());
+                source_of_funds_txt.setText(indCustomer.getSourceOfFunds());
+                conatct_person_txt.setText("N/A");
+
             } else if (customer instanceof CompanyCustomer) {
                 CompanyCustomer compCustomer = (CompanyCustomer) customer;
                 firstname_txt.setText(compCustomer.getCompanyName());
@@ -125,6 +136,8 @@ public class PersonalDetailsController {
                 address_txt.setText(compCustomer.getAddress());
                 number_txt.setText(compCustomer.getContactPhone());
                 email_txt.setText("N/A");
+                source_of_funds_txt.setText("N/A");
+                conatct_person_txt.setText(compCustomer.getContactPerson());
             }
         }
     }

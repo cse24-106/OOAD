@@ -1,5 +1,6 @@
 package com.felix.bankingsystem.view;
 
+import com.felix.bankingsystem.controller.Authenticator;
 import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.controller.BankService;
 import javafx.event.ActionEvent;
@@ -50,7 +51,13 @@ public class LoginController {
 
                 bankService = new BankService();
 
-                password_txt.setOnAction(this::handlePasswordEnter);
+                password_txt.setOnAction(event -> {
+                    try {
+                        handlePasswordEnter(event);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         }
 
         @FXML
@@ -63,7 +70,7 @@ public class LoginController {
                 }
 
                 try{
-                        Customer customer =mockAuthenticate(username, password);
+                        Customer customer =Authenticator(username, password);
                         System.out.println("Login successful for: " + username);
                         loadDashboard(customer);
                 } catch (Exception e) {
@@ -81,7 +88,7 @@ public class LoginController {
         }
 
         @FXML
-        private void handlePasswordEnter(ActionEvent event) {
+        private void handlePasswordEnter(ActionEvent event) throws IOException {
                 handleLogin(event);
         }
 
@@ -112,8 +119,6 @@ public class LoginController {
 
         private void loadDashboard(Customer customer) {
                 try {
-                        System.out.println("Loading dashboard for: " + customer.getFullName());
-
                         // Load the dashboard FXML
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("com/felix/bankingsystem/FXML files/Dashboard.fxml"));
                         Parent root = loader.load();

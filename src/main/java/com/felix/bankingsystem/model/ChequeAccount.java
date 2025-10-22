@@ -1,10 +1,12 @@
 package com.felix.bankingsystem.model;
 
-public class ChequeAccount extends Account {
+import javafx.beans.value.ObservableValue;
+
+public class ChequeAccount extends Account implements Withdraw {
     private String employer;
     private String employerAddress;
 
-    public ChequeAccount(String accountNumber, Customer customer, String employer, String employerAddress) {
+    public ChequeAccount(String accountNumber, double v, Customer customer, String employer, String employerAddress) {
         super(accountNumber, customer);
         this.employer = employer;
         this.employerAddress = employerAddress;
@@ -26,4 +28,15 @@ public class ChequeAccount extends Account {
         this.employerAddress = employerAddress;
     }
 
+    @Override
+    public void Withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+        }
+    }
+
+    @Override
+    public ObservableValue<String> accountNumberProperty() {
+        return null;
+    }
 }

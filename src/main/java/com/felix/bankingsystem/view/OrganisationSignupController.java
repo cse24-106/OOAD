@@ -10,7 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,9 +26,6 @@ public class OrganisationSignupController {
     private Label CustomerID;
 
     @FXML
-    private AnchorPane OrganisationRegistration;
-
-    @FXML
     private TextField Orgname_txt;
 
     @FXML
@@ -43,6 +39,12 @@ public class OrganisationSignupController {
 
     @FXML
     private Button signup_btn;
+
+    @FXML
+    private TextField incoporation_date;
+
+    @FXML
+    private TextField tax_ID_txt;
 
     private BankService bankService;
 
@@ -61,21 +63,23 @@ public class OrganisationSignupController {
     }
 
     private void handleSignup() {
-        String orgName = Orgname_txt.getText().trim();
-        String regNumber = Registrationnum_txt.getText().trim();
+        String companyName = Orgname_txt.getText().trim();
+        String registrationNumber = Registrationnum_txt.getText().trim();
         String address = Address_txt.getText().trim();
         String contactPerson = Contact_person_txt1.getText().trim();
         String phone = number_txt1.getText().trim();
         String customerId = CustomerID.getText();
+        String tax_ID = tax_ID_txt.getText();
+        String incoporation_Date = incoporation_date.getText();
 
         // Validate input
-        if (!validateInput(orgName, regNumber, address, contactPerson, phone)) {
+        if (!validateInput(companyName, registrationNumber, address, contactPerson, phone, tax_ID, incoporation_Date)) {
             return;
         }
 
         try {
             // Create new company customer
-            CompanyCustomer company = new CompanyCustomer(customerId, orgName, regNumber, address, contactPerson, phone);
+            CompanyCustomer company = new CompanyCustomer(customerId, companyName, registrationNumber, address, contactPerson, phone, tax_ID, incoporation_Date);
 
             // Add company to bank service
             if (bankService != null) {
@@ -95,7 +99,7 @@ public class OrganisationSignupController {
     }
 
     private boolean validateInput(String orgName, String regNumber, String address,
-                                  String contactPerson, String phone) {
+                                  String contactPerson, String phone, String tax_ID, String incoporation_Date) {
         if (orgName.isEmpty() || regNumber.isEmpty() || address.isEmpty() ||
                 contactPerson.isEmpty() || phone.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Validation Error",

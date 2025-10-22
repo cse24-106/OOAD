@@ -1,5 +1,10 @@
 package com.felix.bankingsystem.model;
 
+import javafx.beans.value.ObservableValue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Account {
     protected String accountNumber;
     protected double balance;
@@ -17,12 +22,6 @@ public abstract class Account {
         }
     }
 
-    public void withdraw(double amount) {
-        if (amount > 0 && balance >= amount){
-            balance -= amount;
-        }
-    }
-
     public double getBalance() {
         return balance;
     }
@@ -30,4 +29,18 @@ public abstract class Account {
     public String getAccountNumber() {
         return accountNumber;
     }
+
+    private List<Transaction> transactions = new ArrayList<>();
+
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public abstract ObservableValue<String> accountNumberProperty();
+
+
 }

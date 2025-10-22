@@ -2,6 +2,7 @@ package com.felix.bankingsystem.view;
 
 import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.controller.BankService ;
+import com.felix.bankingsystem.model.IndividualCustomer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,19 +22,10 @@ public class CustomerSignupController {
     private Label CustomerID;
 
     @FXML
-    private AnchorPane CustomerRegistraion_screen;
-
-    @FXML
-    private AnchorPane IndividualRegistration;
-
-    @FXML
     private TextField address_txt;
 
     @FXML
     private TextField email_txt;
-
-    @FXML
-    private AnchorPane employee_Info;
 
     @FXML
     private TextField firstname_txt;
@@ -49,6 +41,9 @@ public class CustomerSignupController {
 
     @FXML
     private TextField surname_txt;
+
+    @FXML
+    private TextField source_of_funds_txt;
 
     private BankService bankService;
 
@@ -78,6 +73,7 @@ public class CustomerSignupController {
         String phone = number_txt.getText().trim();
         String email = email_txt.getText().trim();
         String customerId = CustomerID.getText();
+        String source_of_funds = source_of_funds_txt.getText();
 
         // Validate input
         if (!validateInput(firstName, surname, nationalId, address, phone, email)) {
@@ -86,7 +82,7 @@ public class CustomerSignupController {
 
         try {
             // Create new individual customer
-            Customer customer = new Customer(customerId, firstName, surname, address, email, phone);
+            IndividualCustomer customer = new IndividualCustomer(customerId, firstName, surname, address, phone, email, source_of_funds);
             customer.setNationalID(nationalId);
 
             // Add customer to bank service

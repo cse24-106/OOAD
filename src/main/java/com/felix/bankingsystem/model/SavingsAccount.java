@@ -1,11 +1,13 @@
 package com.felix.bankingsystem.model;
 
+import javafx.beans.value.ObservableValue;
+
 public class SavingsAccount extends Account implements InterestCalculation {
     private InterestCalculation interestRate;
 
-    public SavingsAccount(String accountNumber, Customer customer, InterestCalculation interestRate) {
+    public SavingsAccount(String accountNumber, double customer, Customer interestRate) {
         super(accountNumber, customer);
-        this.interestRate = interestRate;
+        this.interestRate = (InterestCalculation) interestRate;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class SavingsAccount extends Account implements InterestCalculation {
     }
 
     @Override
-    public void withdraw(double amount) {
-        System.out.println("Withdrawal is not allwoed for a Savings Account");
+    public ObservableValue<String> accountNumberProperty() {
+        return null;
     }
 }

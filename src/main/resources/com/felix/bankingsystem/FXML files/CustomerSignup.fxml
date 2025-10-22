@@ -72,6 +72,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label text="Firstname: " GridPane.rowIndex="1" />
@@ -88,6 +89,8 @@
                               <Label layoutX="10.0" layoutY="378.0" prefHeight="22.0" prefWidth="66.0" text="Email:" GridPane.rowIndex="6" />
                               <TextField fx:id="email_txt" layoutX="444.0" layoutY="376.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                               <Label fx:id="CustomerID" layoutX="10.0" layoutY="33.0" text="Customer ID:" GridPane.columnIndex="1" />
+                              <Label layoutX="10.0" layoutY="252.0" prefHeight="22.0" prefWidth="86.0" text="Source  of funds" GridPane.rowIndex="7" />
+                              <TextField fx:id="source_of_funds_txt" layoutX="250.0" layoutY="259.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                            </children>
                         </GridPane>
                      </children>

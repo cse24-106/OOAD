@@ -11,8 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Comparator;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 
 public class DepositController {
@@ -82,11 +83,11 @@ public class DepositController {
     }
 
     private void setupTableColumns() {
-        Dash_tranTable_tranID.setCellValueFactory(cellData -> cellData.getValue().transactionIdProperty());
-        Dash_tranTable_date.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-        Dash_tranTable_type.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
-        Dash_tranTable_amount.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
-        Dash_tranTable_balance_after.setCellValueFactory(cellData -> cellData.getValue().balanceAfterProperty().asObject());
+        Dash_tranTable_tranID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTransactionID()));
+        Dash_tranTable_date.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
+        Dash_tranTable_type.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getType()));
+        Dash_tranTable_amount.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getAmount()).asObject());
+        Dash_tranTable_balance_after.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
     private void setupButtonActions() {
@@ -132,15 +133,12 @@ public class DepositController {
                 return;
             }
 
-            // For simplicity, deposit to first account
-            // In real app, you'd let user select account
-            if (!customer.getAccounts().isEmpty()) {
-                selectedAccount = customer.getAccounts().get(0);
+            if (customer == null || customer.getAccounts().isEmpty()) {
+                showAlert("Error", "No accounts available for deposit");
 
                 // Create transaction
                 Transaction transaction = new Transaction(
                         "T" + System.currentTimeMillis(),
-                        LocalDateTime.now(),
                         "DEPOSIT",
                         amount,
                         selectedAccount.getBalance() + amount
