@@ -23,7 +23,9 @@ public class OpenAccountController {
     @FXML private Button open_acc_btn;
     @FXML private Button pers_det_btn;
     @FXML private Button transaction_hist_btn;
+    @FXML private Button logout_btn;
     @FXML private Button withdraw_btn;
+
 
     private Customer customer;
     private BankService bankService;
@@ -48,6 +50,7 @@ public class OpenAccountController {
         accountTypeChoiceBox.setValue("Savings Account");
     }
 
+    @FXML
     private void setupButtonActions() {
         dashboard_btn.setOnAction(e -> showDashboard());
         deposit_btn.setOnAction(e -> showDepositScreen());
@@ -56,6 +59,7 @@ public class OpenAccountController {
         pers_det_btn.setOnAction(e -> showPersonalDetailsScreen());
         transaction_hist_btn.setOnAction(e -> showTransactionHistoryScreen());
         Open_acc_btn.setOnAction(e -> handleOpenAccount());
+        logout_btn.setOnAction(e -> logout());
     }
 
     private void updateBalance() {
@@ -67,6 +71,7 @@ public class OpenAccountController {
         }
     }
 
+    @FXML
     private void handleOpenAccount() {
         String accountType = accountTypeChoiceBox.getValue();
 
@@ -79,7 +84,7 @@ public class OpenAccountController {
             switch (accountType) {
                 case "Savings Account":
                     SavingsAccount savingsAccount = new SavingsAccount(
-                            generateAccountNumber(), 50.0, customer);
+                            generateAccountNumber(), customer, 50.0);
                     customer.addAccount(savingsAccount);
                     break;
 
@@ -109,26 +114,32 @@ public class OpenAccountController {
         return "ACC" + System.currentTimeMillis();
     }
 
+    @FXML
     private void showDashboard() {
         navigateTo("/com/felix/bankingsystem/view/Dashboard.fxml", "Dashboard");
     }
 
+    @FXML
     private void showDepositScreen() {
         navigateTo("/com/felix/bankingsystem/view/Deposit.fxml", "Deposit Funds");
     }
 
+    @FXML
     private void showWithdrawScreen() {
         navigateTo("/com/felix/bankingsystem/view/Withdraw.fxml", "Withdraw Funds");
     }
 
+    @FXML
     private void showOpenAccountScreen() {
         // Already on open account screen
     }
 
+    @FXML
     private void showPersonalDetailsScreen() {
         navigateTo("/com/felix/bankingsystem/view/Personaldetails.fxml", "Personal Details");
     }
 
+    @FXML
     private void showTransactionHistoryScreen() {
         navigateTo("/com/felix/bankingsystem/view/TransactionHistory.fxml", "Transaction History");
     }
@@ -160,6 +171,22 @@ public class OpenAccountController {
             ((DepositController) controller).setBankService(bankService);
         }
         // Add other controllers as needed
+    }
+
+    @FXML
+    private void logout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) logout_btn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Capital Bank - Login");
+            stage.centerOnScreen();
+
+        } catch (IOException e) {
+            showAlert("Error", "Cannot logout: " + e.getMessage());
+        }
     }
 
     private void showAlert(String title, String message) {

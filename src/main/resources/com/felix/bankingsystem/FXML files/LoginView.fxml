@@ -73,7 +73,7 @@
                         <Font name="System Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label fx:id="error_message" layoutX="178.0" layoutY="290.0" prefHeight="22.0" prefWidth="250.0" text="Error message will appear here" wrapText="true">
+                  <Label fx:id="error_message" layoutX="75.0" layoutY="292.0" prefHeight="22.0" prefWidth="250.0" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>

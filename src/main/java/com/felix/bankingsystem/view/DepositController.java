@@ -63,6 +63,9 @@ public class DepositController {
     @FXML
     private Button withdraw_btn;
 
+    @FXML
+    private Button logout_btn;
+
     private Customer customer;
     private BankService bankService;
     private Account selectedAccount;
@@ -90,6 +93,7 @@ public class DepositController {
         Dash_tranTable_balance_after.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
+    @FXML
     private void setupButtonActions() {
         dashboard_btn.setOnAction(e -> showDashboard());
         deposit_btn.setOnAction(e -> showDepositScreen());
@@ -124,6 +128,7 @@ public class DepositController {
         }
     }
 
+    @FXML
     private void handleDeposit() {
         try {
             double amount = Double.parseDouble(Dep_amount.getText().trim());
@@ -145,8 +150,8 @@ public class DepositController {
                 );
 
                 // Update account balance
-                selectedAccount.deposit(amount);
-                selectedAccount.addTransaction(transaction);
+                bankService.deposit(customer, amount);
+                updateView();
 
                 showAlert("Success", String.format("Deposited P%.2f successfully", amount));
                 Dep_amount.clear();
@@ -161,30 +166,37 @@ public class DepositController {
         }
     }
 
+    @FXML
     private void showDashboard() {
         navigateTo("/com/felix/bankingsystem/view/Dashboard.fxml", "Dashboard");
     }
 
+    @FXML
     private void showDepositScreen() {
         // Already on deposit screen
     }
 
+    @FXML
     private void showWithdrawScreen() {
         navigateTo("/com/felix/bankingsystem/view/Withdraw.fxml", "Withdraw Funds");
     }
 
+    @FXML
     private void showOpenAccountScreen() {
         navigateTo("/com/felix/bankingsystem/view/Openaccount.fxml", "Open Account");
     }
 
+    @FXML
     private void showPersonalDetailsScreen() {
         navigateTo("/com/felix/bankingsystem/view/Personaldetails.fxml", "Personal Details");
     }
 
+    @FXML
     private void showTransactionHistoryScreen() {
         navigateTo("/com/felix/bankingsystem/view/TransactionHistory.fxml", "Transaction History");
     }
 
+    @FXML
     private void navigateTo(String fxmlPath, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -210,6 +222,23 @@ public class DepositController {
         }
     }
 
+    @FXML
+    private void logout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) logout_btn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Capital Bank - Login");
+            stage.centerOnScreen();
+
+        } catch (IOException e) {
+            showAlert("Error", "Cannot logout: " + e.getMessage());
+        }
+    }
+
+    @FXML
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

@@ -1,5 +1,6 @@
 package com.felix.bankingsystem.view;
 
+import com.felix.bankingsystem.controller.BankService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,8 @@ public class CustomerTypeController {
     @FXML
     private Button Organisation_btn;
 
+    private BankService bankService;
+
     @FXML
     private void initialize() {
         // Set up button actions
@@ -24,10 +27,11 @@ public class CustomerTypeController {
         Organisation_btn.setOnAction(e -> handleOrganisationCustomer());
     }
 
+    @FXML
     private void handleIndividualCustomer() {
         try {
             // Load individual customer registration screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/CustomerSignup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/CustomerSignup.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) Individual_btn.getScene().getWindow();
@@ -41,10 +45,11 @@ public class CustomerTypeController {
         }
     }
 
+    @FXML
     private void handleOrganisationCustomer() {
         try {
             // Load organisation registration screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/OrganisationSignup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/OrganisationSignup.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) Organisation_btn.getScene().getWindow();
@@ -56,5 +61,9 @@ public class CustomerTypeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setBankService(BankService bankService) {
+        this.bankService = bankService;
     }
 }

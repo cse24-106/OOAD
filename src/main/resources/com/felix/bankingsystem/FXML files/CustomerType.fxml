@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.CustomerTypeController">
    <children>
       <AnchorPane fx:id="CustomerType" layoutX="10.0" layoutY="10.0" prefHeight="481.0" prefWidth="866.0">
@@ -18,8 +17,8 @@
             </Label>
             <HBox layoutX="262.0" layoutY="189.0" prefHeight="52.0" prefWidth="342.0" spacing="60.0">
                <children>
-                  <Button fx:id="Organisation_btn" mnemonicParsing="false" prefHeight="42.0" prefWidth="140.0" text="Organisation/Company Customer" wrapText="true" />
-                  <Button fx:id="Individual_btn" mnemonicParsing="false" prefHeight="42.0" prefWidth="140.0" text=" Individual Customer" wrapText="true" />
+                  <Button fx:id="Organisation_btn" mnemonicParsing="false" onAction="#handleOrganisationCustomer" prefHeight="42.0" prefWidth="140.0" text="Organisation/Company Customer" wrapText="true" />
+                  <Button fx:id="Individual_btn" mnemonicParsing="false" onAction="#handleIndividualCustomer" prefHeight="42.0" prefWidth="140.0" text=" Individual Customer" wrapText="true" />
                </children>
             </HBox>
          </children>

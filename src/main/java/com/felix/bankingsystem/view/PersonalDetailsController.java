@@ -84,6 +84,7 @@ public class PersonalDetailsController {
         this.bankService = bankService;
     }
 
+    @FXML
     private void setupButtonActions() {
         dashboard_btn.setOnAction(e -> showDashboard());
         deposit_btn.setOnAction(e -> showDepositScreen());
@@ -142,30 +143,37 @@ public class PersonalDetailsController {
         }
     }
 
+    @FXML
     private void showDashboard() {
         navigateTo("/com/felix/bankingsystem/view/Dashboard.fxml", "Dashboard");
     }
 
+    @FXML
     private void showDepositScreen() {
         navigateTo("/com/felix/bankingsystem/view/Deposit.fxml", "Deposit Funds");
     }
 
+    @FXML
     private void showWithdrawScreen() {
         navigateTo("/com/felix/bankingsystem/view/Withdraw.fxml", "Withdraw Funds");
     }
 
+    @FXML
     private void showOpenAccountScreen() {
         navigateTo("/com/felix/bankingsystem/view/Openaccount.fxml", "Open Account");
     }
 
+    @FXML
     private void showPersonalDetailsScreen() {
         // Already on personal details screen
     }
 
+    @FXML
     private void showTransactionHistoryScreen() {
         navigateTo("/com/felix/bankingsystem/view/TransactionHistory.fxml", "Transaction History");
     }
 
+    @FXML
     private void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));

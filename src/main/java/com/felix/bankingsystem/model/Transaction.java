@@ -21,10 +21,6 @@ public class Transaction {
         return transactionID;
     }
 
-    public void setTransactionID(String transactionID) {
-        this.transactionID = transactionID;
-    }
-
     public String getDate() {
         return date;
     }

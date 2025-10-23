@@ -46,6 +46,9 @@ public class OrganisationSignupController {
     @FXML
     private TextField tax_ID_txt;
 
+    @FXML
+    private Button return_to_login;
+
     private BankService bankService;
 
     @FXML
@@ -53,8 +56,11 @@ public class OrganisationSignupController {
         String customerId = generateCustomerId();
         CustomerID.setText(customerId);
 
+        bankService = new BankService();
+
         // Set up signup button action
         signup_btn.setOnAction(e -> handleSignup());
+        return_to_login.setOnAction(e -> returnToLogin());
     }
 
     private String generateCustomerId() {
@@ -62,6 +68,7 @@ public class OrganisationSignupController {
         return "ORG" + System.currentTimeMillis();
     }
 
+    @FXML
     private void handleSignup() {
         String companyName = Orgname_txt.getText().trim();
         String registrationNumber = Registrationnum_txt.getText().trim();
@@ -110,9 +117,10 @@ public class OrganisationSignupController {
         return true;
     }
 
+    @FXML
     private void returnToLogin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/LoginView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) signup_btn.getScene().getWindow();

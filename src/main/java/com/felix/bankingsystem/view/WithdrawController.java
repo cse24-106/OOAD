@@ -43,6 +43,9 @@ public class WithdrawController {
     @FXML
     private Button withdraw_btn;
 
+    @FXML
+    private Button Withdraw_btn;
+
     private Customer customer;
     private BankService bankService;
     private Account selectedAccount;
@@ -61,14 +64,16 @@ public class WithdrawController {
         this.bankService = bankService;
     }
 
+    @FXML
     private void setupButtonActions() {
         dashboard_btn.setOnAction(e -> showDashboard());
         deposit_btn.setOnAction(e -> showDepositScreen());
-        withdraw_btn.setOnAction(e -> handleWithdraw());
+        withdraw_btn.setOnAction(e -> showWithdrawScreen());
         open_acc_btn.setOnAction(e -> showOpenAccountScreen());
         pers_det_btn.setOnAction(e -> showPersonalDetailsScreen());
         transaction_hist_btn.setOnAction(e -> showTransactionHistoryScreen());
         logout_btn.setOnAction(e -> logout());
+        Withdraw_btn.setOnAction(e -> handleWithdraw());
     }
 
     private void updateView() {
@@ -80,6 +85,7 @@ public class WithdrawController {
         }
     }
 
+    @FXML
     private void handleWithdraw() {
         try {
             double amount = Double.parseDouble(withdraw_amount.getText().trim());
@@ -108,7 +114,8 @@ public class WithdrawController {
                 );
 
                 // Update account balance
-                selectedAccount.addTransaction(transaction);
+                bankService.withdraw(customer, amount);
+                updateView();
 
                 showAlert("Success", String.format("Withdrawn P%.2f successfully", amount));
                 withdraw_amount.clear();
@@ -123,26 +130,37 @@ public class WithdrawController {
         }
     }
 
+    @FXML
     private void showDashboard() {
         navigateTo("/com/felix/bankingsystem/view/Dashboard.fxml", "Dashboard");
     }
 
+    @FXML
     private void showDepositScreen() {
         navigateTo("/com/felix/bankingsystem/view/Deposit.fxml", "Deposit Funds");
     }
 
+    @FXML
+    private void showWithdrawScreen() {
+        navigateTo("/com/felix/bankingsystem/view/Withdraw.fxml", "Withdraw Funds");
+    }
+
+    @FXML
     private void showOpenAccountScreen() {
         navigateTo("/com/felix/bankingsystem/view/Openaccount.fxml", "Open Account");
     }
 
+    @FXML
     private void showPersonalDetailsScreen() {
         navigateTo("/com/felix/bankingsystem/view/Personaldetails.fxml", "Personal Details");
     }
 
+    @FXML
     private void showTransactionHistoryScreen() {
         navigateTo("/com/felix/bankingsystem/view/TransactionHistory.fxml", "Transaction History");
     }
 
+    @FXML
     private void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));

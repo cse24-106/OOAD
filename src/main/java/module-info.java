@@ -1,12 +1,15 @@
 module com.felix.bankingsystem {
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.desktop;
-    requires java.naming;
 
+    // Allow FXML files to access controller classes via reflection
+    opens com.felix.bankingsystem.view to javafx.fxml;
+    opens com.felix.bankingsystem.controller to javafx.fxml;
+    opens com.felix.bankingsystem.model to javafx.base;
 
-    opens com.felix.bankingsystem to javafx.fxml;
-    exports com.felix.bankingsystem;
+    // Export your packages that need to be used outside the module
+    exports com.felix.bankingsystem.main;
+    exports com.felix.bankingsystem.controller;
     exports com.felix.bankingsystem.model;
-    opens com.felix.bankingsystem.model to javafx.fxml;
+    exports com.felix.bankingsystem.view;
 }

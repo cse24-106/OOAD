@@ -29,12 +29,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="open_acc_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Open account" GridPane.rowIndex="4" />
-                  <Button fx:id="transaction_hist_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Transaction history" GridPane.rowIndex="3" />
-                  <Button fx:id="withdraw_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Withdraw funds" GridPane.rowIndex="2" />
-                  <Button fx:id="deposit_btn" mnemonicParsing="false" prefHeight="50.0" prefWidth="171.0" text="Deposit funds" GridPane.rowIndex="1" />
-                  <Button fx:id="pers_det_btn" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Personal details" GridPane.rowIndex="5" />
-                  <Button fx:id="dashboard_btn" layoutX="10.0" layoutY="69.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Dashbaord" />
+                  <Button fx:id="open_acc_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" onAction="#showOpenAccountScreen" prefHeight="50.0" prefWidth="170.0" text="Open account" GridPane.rowIndex="4" />
+                  <Button fx:id="transaction_hist_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" onAction="#showTransactionHistoryScreen" prefHeight="50.0" prefWidth="170.0" text="Transaction history" GridPane.rowIndex="3" />
+                  <Button fx:id="withdraw_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" onAction="#showWithdrawScreen" prefHeight="50.0" prefWidth="170.0" text="Withdraw funds" GridPane.rowIndex="2" />
+                  <Button fx:id="deposit_btn" mnemonicParsing="false" onAction="#showDepositScreen" prefHeight="50.0" prefWidth="171.0" text="Deposit funds" GridPane.rowIndex="1" />
+                  <Button fx:id="pers_det_btn" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#showPersonalDetailsScreen" prefHeight="50.0" prefWidth="170.0" text="Personal details" GridPane.rowIndex="5" />
+                  <Button fx:id="dashboard_btn" layoutX="10.0" layoutY="69.0" mnemonicParsing="false" onAction="#showDashboard" prefHeight="50.0" prefWidth="170.0" text="Dashbaord" />
                </children>
             </GridPane>
          </left>
@@ -72,7 +72,7 @@
             </HBox>
          </top>
          <bottom>
-            <Button fx:id="Logout_btn" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" text="Logout" BorderPane.alignment="CENTER" />
+            <Button fx:id="Logout_btn" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="100.0" text="Logout" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">

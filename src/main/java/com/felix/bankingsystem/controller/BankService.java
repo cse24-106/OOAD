@@ -1,9 +1,9 @@
 package com.felix.bankingsystem.controller;
 
-import com.felix.bankingsystem.model.Customer;
-import com.felix.bankingsystem.model.InvestmentAccount;
+import com.felix.bankingsystem.model.*;
 import javafx.scene.control.Alert;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class BankService {
@@ -45,5 +45,47 @@ public class BankService {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+
+
+    public void deposit(Customer customer, double amount) {
+        Account account = customer.getAccounts().get(0);
+        account.deposit(amount);
+
+        // Generate transaction details
+        String transactionId = UUID.randomUUID().toString();
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String type = "Deposit";
+        double balanceAfter = account.getBalance();
+
+        // Create transaction using your existing constructor
+        Transaction transaction = new Transaction(transactionId, date, type, amount, balanceAfter);
+        account.addTransaction(transaction);
+    }
+
+
+    public void withdraw(Customer customer, double amount) {
+        Account account = customer.getAccounts().get(0);
+        account.withdraw(amount);
+
+        String transactionId = UUID.randomUUID().toString();
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String type = "Withdrawal";
+        double balanceAfter = account.getBalance();
+
+        Transaction transaction = new Transaction(transactionId, date, type, amount, balanceAfter);
+        account.addTransaction(transaction);
+    }
+
+
+    public void applyMonthlyInterestToAllAccounts() {
+        for (Customer customer : customers.values()) {
+            for (Account account : customer.getAccounts()) {
+                if (account instanceof InterestPayable interestAccount) {
+                    interestAccount.applyInterest();
+                }
+            }
+        }
+
     }
 }

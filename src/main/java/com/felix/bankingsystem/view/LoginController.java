@@ -69,13 +69,18 @@ public class LoginController {
                         return;
                 }
 
-                try{
-                        Customer customer =Authenticator(username, password);
-                        System.out.println("Login successful for: " + username);
-                        loadDashboard(customer);
+                try {
+                        Authenticator auth = new Authenticator(username, password);
+                        Customer customer = auth.login();
+
+                        if (customer != null) {
+                                System.out.println("Login successful for " + customer.getDisplayName());
+                        } else {
+                                System.out.println("Invalid credentials");
+                                showError("Invalid credentials");
+                        }
                 } catch (Exception e) {
-                        System.err.println("Login failed: " + e.getMessage());
-                        showError("Invalid username or password");
+                        e.printStackTrace();
                 }
         }
 
@@ -102,7 +107,7 @@ public class LoginController {
         }
 
         private void loadCustomerTypeView() throws IOException {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/CustomerType.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/CustomerType.fxml"));
                 Parent root = loader.load();
 
                 Stage stage = (Stage) signup_hyper.getScene().getWindow();
@@ -115,43 +120,5 @@ public class LoginController {
         private void showError(String message) {
                 error_message.setText(message);
                 error_message.setVisible(true);
-        }
-
-        private void loadDashboard(Customer customer) {
-                try {
-                        // Load the dashboard FXML
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("com/felix/bankingsystem/FXML files/Dashboard.fxml"));
-                        Parent root = loader.load();
-
-                        DashboardController dashboardController = loader.getController();
-                        dashboardController.setCustomer(customer);
-                        dashboardController.setBankService(bankService);
-
-                        // Get the current stage
-                        Stage stage = (Stage) login_btn.getScene().getWindow();
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.setTitle("Capital Bank - Dashboard");
-                        stage.centerOnScreen();
-
-                } catch (IOException e) {
-                        showError("Error loading dashboard: " + e.getMessage());
-                        e.printStackTrace();
-                }
-        }
-
-        private void loadSignupView() throws IOException {
-                // Load the signup FXML
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/CustomerType.fxml"));
-                Parent root = loader.load();
-
-                CustomerTypeController signupController = loader.getController();
-                signupController.setBankService(bankService);
-
-                Stage stage = (Stage) signup_hyper.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Capital Bank - Sign Up");
-                stage.centerOnScreen();
         }
 }

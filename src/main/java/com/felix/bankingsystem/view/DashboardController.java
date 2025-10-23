@@ -107,6 +107,7 @@ public class DashboardController {
                 new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
+    @FXML
     private void setupButtonActions() {
         dashboard_btn.setOnAction(e -> showDashboard());
         deposit_btn.setOnAction(e -> showDepositScreen());
@@ -137,13 +138,15 @@ public class DashboardController {
         Dash_transactions_table.getItems().setAll(transactions);
     }
 
+    @FXML
     private void showDashboard() {
         // Already on dashboard
     }
 
+    @FXML
     private void showDepositScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Deposit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Deposit.fxml"));
             Parent root = loader.load();
 
             DepositController controller = loader.getController();
@@ -159,9 +162,10 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void showWithdrawScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Withdraw.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Withdraw.fxml"));
             Parent root = loader.load();
 
             WithdrawController controller = loader.getController();
@@ -177,9 +181,10 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void showOpenAccountScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Openaccount.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/OpenAccount.fxml"));
             Parent root = loader.load();
 
             OpenAccountController controller = loader.getController();
@@ -195,9 +200,10 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void showPersonalDetailsScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Personaldetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/PersonalDetails.fxml"));
             Parent root = loader.load();
 
             PersonalDetailsController controller = loader.getController();
@@ -213,9 +219,10 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void showTransactionHistoryScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/TransactionHistory.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/TransationHistory.fxml"));
             Parent root = loader.load();
 
             TransactionHistoryController controller = loader.getController();
@@ -231,9 +238,10 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void logout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/LoginView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) logout_btn.getScene().getWindow();
@@ -246,6 +254,7 @@ public class DashboardController {
         }
     }
 
+    @FXML
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

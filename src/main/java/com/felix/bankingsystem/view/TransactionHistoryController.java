@@ -37,7 +37,7 @@ public class TransactionHistoryController {
     private TableColumn<Transaction, String> Dash_tranTable_type;
 
     @FXML
-    private TableView<?> Dash_transactions_table;
+    private TableView<Transaction> Dash_transactions_table;
 
     @FXML
     private Button dashboard_btn;
@@ -92,6 +92,7 @@ public class TransactionHistoryController {
                 new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
+    @FXML
     private void setupButtonActions() {
         dashboard_btn.setOnAction(e -> showDashboard());
         deposit_btn.setOnAction(e -> showDepositScreen());
@@ -125,30 +126,37 @@ public class TransactionHistoryController {
         }
     }
 
+    @FXML
     private void showDashboard() {
         navigateTo("/com/felix/bankingsystem/view/Dashboard.fxml", "Dashboard");
     }
 
+    @FXML
     private void showDepositScreen() {
         navigateTo("/com/felix/bankingsystem/view/Deposit.fxml", "Deposit Funds");
     }
 
+    @FXML
     private void showWithdrawScreen() {
         navigateTo("/com/felix/bankingsystem/view/Withdraw.fxml", "Withdraw Funds");
     }
 
+    @FXML
     private void showOpenAccountScreen() {
         navigateTo("/com/felix/bankingsystem/view/Openaccount.fxml", "Open Account");
     }
 
+    @FXML
     private void showPersonalDetailsScreen() {
         navigateTo("/com/felix/bankingsystem/view/Personaldetails.fxml", "Personal Details");
     }
 
+    @FXML
     private void showTransactionHistoryScreen() {
         // Already on transaction history screen
     }
 
+    @FXML
     private void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));

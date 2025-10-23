@@ -48,9 +48,6 @@
                </BorderPane.margin>
             </HBox>
          </top>
-         <bottom>
-            <Button fx:id="signup_btn" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" text="Sign Up" BorderPane.alignment="CENTER" />
-         </bottom>
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -93,6 +90,7 @@
                               <TextField fx:id="source_of_funds_txt" layoutX="250.0" layoutY="259.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                            </children>
                         </GridPane>
+                        <Button fx:id="return_to_login_btn" layoutX="193.0" layoutY="467.0" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="34.0" prefWidth="100.0" text="Return to Login" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="employee_Info" layoutX="4.0" layoutY="5.0" prefHeight="497.0" prefWidth="882.0" visible="false">
@@ -115,6 +113,7 @@
                         </GridPane>
                      </children>
                   </AnchorPane>
+                  <Button fx:id="signup_btn" layoutX="378.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleSignup" prefHeight="34.0" prefWidth="100.0" text="Sign Up" />
                </children>
             </AnchorPane>
          </center>

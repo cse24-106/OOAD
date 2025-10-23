@@ -9,6 +9,14 @@ public class IndividualCustomer extends Customer {
     private String email;
     private String source_of_funds;
 
+    public String getSource_of_funds() {
+        return source_of_funds;
+    }
+
+    public void setSource_of_funds(String source_of_funds) {
+        this.source_of_funds = source_of_funds;
+    }
+
     public IndividualCustomer(String customerID, String address, String firstName, String surname, String nationalID, String phoneNumber, String email) {
         super(customerID, address);
         this.firstName = firstName;
@@ -17,7 +25,6 @@ public class IndividualCustomer extends Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.source_of_funds = source_of_funds;
     }
 
     public String getFirstName() {

@@ -1,6 +1,5 @@
 package com.felix.bankingsystem.view;
 
-import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.controller.BankService ;
 import com.felix.bankingsystem.model.IndividualCustomer;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -45,6 +43,9 @@ public class CustomerSignupController {
     @FXML
     private TextField source_of_funds_txt;
 
+    @FXML
+    private Button return_to_login_btn;
+
     private BankService bankService;
 
     @FXML
@@ -55,6 +56,7 @@ public class CustomerSignupController {
 
         // Set up signup button action
         signup_btn.setOnAction(e -> handleSignup());
+        return_to_login_btn.setOnAction(e -> returnToLogin());
     }
 
     public void setBankService(BankService bankService) {
@@ -65,6 +67,7 @@ public class CustomerSignupController {
         return "CUST" + System.currentTimeMillis();
     }
 
+    @FXML
     private void handleSignup() {
         String firstName = firstname_txt.getText().trim();
         String surname = surname_txt.getText().trim();
@@ -121,9 +124,10 @@ public class CustomerSignupController {
         return true;
     }
 
+    @FXML
     private void returnToLogin() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/view/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/LoginView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) signup_btn.getScene().getWindow();
