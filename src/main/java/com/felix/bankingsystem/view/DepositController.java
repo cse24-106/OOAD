@@ -124,7 +124,7 @@ public class DepositController {
                     .filter(transaction -> "DEPOSIT".equals(transaction.getType()))
                     .sorted(Comparator.comparing(Transaction::getDate).reversed())
                     .toList();
-            Dash_transactions_table.getItems().setAll(depositTransactions);
+            Dash_transactions_table.getItems().setAll((Transaction[]) depositTransactions);
         }
     }
 
