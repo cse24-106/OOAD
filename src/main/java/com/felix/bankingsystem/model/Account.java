@@ -16,14 +16,14 @@ public abstract class Account {
         this.balance = 0.0;
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public void deposit(double amount) {
         if (amount > 0){
             balance += amount;
         }
-    }
-
-    public void withdraw(double amount) {
-        balance -= amount;
     }
 
     public double getBalance() {
