@@ -103,13 +103,14 @@ public class CustomerSignupController {
             // Create new individual customer
             IndividualCustomer customer = new IndividualCustomer(customerId, firstName, surname, address, phone, email, source_of_funds);
             customer.setNationalID(nationalId);
-            customer.setPassword(password);
+            customer.setPassword(password_txt.getText());
 
             // Add customer to bank service
             if (bankService != null) {
                 bankService.addCustomer(customer);
             }
 
+            System.out.println("Sent to bank service");
             showAlert(Alert.AlertType.INFORMATION, "Success",
                     "Individual customer registered successfully!\nCustomer ID: " + customerId);
 

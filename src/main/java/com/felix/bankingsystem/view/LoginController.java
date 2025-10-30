@@ -67,12 +67,12 @@ public class LoginController {
                 }
 
                 try {
-                        Authenticator auth = new Authenticator(identifier, password, bankService);
+                        Authenticator auth = new Authenticator(identifier, password);
                         Customer customer = auth.login();
 
                         if (customer != null) {
                                 System.out.println("Login successful for " + customer.getDisplayName());
-                                loadDashboard(customer)
+                                loadDashboard();
                         } else {
                                 System.out.println("Invalid credentials");
                                 showError("Invalid credentials");
@@ -115,16 +115,16 @@ public class LoginController {
                 stage.centerOnScreen();
         }
 
-//        private void loadDashboard() throws IOException {
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Dashboard.fxml"));
-//                Parent root = loader.load();
-//
-//                Stage stage = (Stage) signup_hyper.getScene().getWindow();
-//                Scene scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.setTitle("Choose Customer Type");
-//                stage.centerOnScreen();
-//        }
+        private void loadDashboard() throws IOException {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Dashboard.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) login_btn.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Dashboard");
+                stage.centerOnScreen();
+        }
 
         private void showError(String message) {
                 error_message.setText(message);

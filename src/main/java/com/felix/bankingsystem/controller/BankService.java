@@ -11,6 +11,7 @@ public class BankService {
     public BankService() {
         this.database = new DatabaseHandler();
         this.customers = database.loadCustomers();
+
         database.loadAccounts(customers);
         database.loadTransactions(customers);
 

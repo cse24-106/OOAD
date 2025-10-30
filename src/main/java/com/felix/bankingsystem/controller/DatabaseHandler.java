@@ -14,16 +14,17 @@ public class DatabaseHandler {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Customers_Details))) {
             for (Customer c : customers) {
                 if (c instanceof IndividualCustomer ic) {
-                    writer.write(String.format("IND,%s,%s,%s,%s,%s,%s,%s",
+                    writer.write(String.format("IND,%s,%s,%s,%s,%s,%s,%s,%s",
                             ic.getCustomerId(),
                             ic.getFirstName(),
                             ic.getSurname(),
                             ic.getNationalID(),
                             ic.getAddress(),
                             ic.getPhoneNumber(),
-                            ic.getEmail()));
+                            ic.getEmail(),
+                            ic.getPassword()));
                 } else if (c instanceof CompanyCustomer cc) {
-                    writer.write(String.format("ORG,%s,%s,%s,%s,%s,%s,%s,%s",
+                    writer.write(String.format("ORG,%s,%s,%s,%s,%s,%s,%s,%s,%s",
                             cc.getCustomerId(),
                             cc.getCompanyName(),
                             cc.getRegistrationNumber(),
@@ -31,7 +32,8 @@ public class DatabaseHandler {
                             cc.getContactPerson(),
                             cc.getContactPhone(),
                             cc.getTax_ID(),
-                            cc.getIncoporation_Date()));
+                            cc.getIncoporation_Date(),
+                            cc.getPassword()));
                 }
                 writer.newLine();
             }
@@ -99,12 +101,16 @@ public class DatabaseHandler {
                 if (data[0].equals("IND")) {
                     // IND, ID, first, surname, nationalID, address, phone, email
                     IndividualCustomer c = new IndividualCustomer(
-                            data[1], data[4], data[2], data[3], data[4], data[5], data[6]);
+                            data[1], data[2], data[3], data[5], data[6], data[7], "N/A");
+                    c.setNationalID(data[4]);
+                    c.setPassword(data[8]);
                     customers.put(c.getCustomerId(), c);
                 } else if (data[0].equals("ORG")) {
                     // ORG, ID, name, regNo, address, contact, phone, tax, incorp
                     CompanyCustomer c = new CompanyCustomer(
                             data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8]);
+                    c.setPassword(data[9]
+                    );
                     customers.put(c.getCustomerId(), c);
                 }
             }

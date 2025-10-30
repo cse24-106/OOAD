@@ -3,37 +3,37 @@ package com.felix.bankingsystem.controller;
 import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.model.IndividualCustomer;
 
+import java.util.Map;
+
 public class Authenticator {
     private final String identifier;
     private final String password;
-    private final BankService bankService;
 
-    public Authenticator(String identifier, String password, BankService bankService) {
+    public Authenticator(String identifier, String password) {
         this.identifier = identifier;
         this.password = password;
-        this.bankService = bankService;
     }
 
     public Customer login() {
-        if (bankService == null) {
-            throw new IllegalStateException("BankService is not initialized");
-        }
+        DatabaseHandler db = new DatabaseHandler();
+        Map<String, Customer> customers = db.loadCustomers();
 
-        // Check individuals by email
-        for (Customer c : bankService.getAllCustomers()) {
+        // Try to find individual by email
+        for (Customer c : customers.values()) {
             if (c instanceof IndividualCustomer ind) {
                 if (ind.getEmail().equalsIgnoreCase(identifier)
                         && ind.getPassword().equals(password)) {
-                    return ind; //Individual login successful
+                    return ind;
                 }
             }
         }
 
-        // Check organizations by CustomerID
-        Customer org = bankService.getCustomerById(identifier);
+        // Try to find organization by CustomerID
+        Customer org = customers.get(identifier);
         if (org != null && org.getPassword().equals(password)) {
-            return org; //Organization login successful
+            return org;
         }
+
         return null;
     }
 }
