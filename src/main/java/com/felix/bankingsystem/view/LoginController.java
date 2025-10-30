@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -33,7 +30,7 @@ public class LoginController {
         private BorderPane login_screen;
 
         @FXML
-        private TextField password_txt;
+        private PasswordField password_txt;
 
         @FXML
         private Hyperlink signup_hyper;
@@ -62,19 +59,20 @@ public class LoginController {
 
         @FXML
         private void handleLogin(ActionEvent event) throws IOException {
-                String username = username_txt.getText();
+                String identifier = username_txt.getText();
                 String password = password_txt.getText();
 
-                if(!validateInput(username, password)) {
+                if(!validateInput(identifier, password)) {
                         return;
                 }
 
                 try {
-                        Authenticator auth = new Authenticator(username, password);
+                        Authenticator auth = new Authenticator(identifier, password, bankService);
                         Customer customer = auth.login();
 
                         if (customer != null) {
                                 System.out.println("Login successful for " + customer.getDisplayName());
+                                loadDashboard(customer)
                         } else {
                                 System.out.println("Invalid credentials");
                                 showError("Invalid credentials");
@@ -84,8 +82,8 @@ public class LoginController {
                 }
         }
 
-        private boolean validateInput(String username, String password) {
-                if(username.isEmpty() || password.isEmpty()) {
+        private boolean validateInput(String identifier, String password) {
+                if(identifier.isEmpty() || password.isEmpty()) {
                         showError("Please fill in all fields");
                         return false;
                 }
@@ -116,6 +114,17 @@ public class LoginController {
                 stage.setTitle("Choose Customer Type");
                 stage.centerOnScreen();
         }
+
+//        private void loadDashboard() throws IOException {
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Dashboard.fxml"));
+//                Parent root = loader.load();
+//
+//                Stage stage = (Stage) signup_hyper.getScene().getWindow();
+//                Scene scene = new Scene(root);
+//                stage.setScene(scene);
+//                stage.setTitle("Choose Customer Type");
+//                stage.centerOnScreen();
+//        }
 
         private void showError(String message) {
                 error_message.setText(message);

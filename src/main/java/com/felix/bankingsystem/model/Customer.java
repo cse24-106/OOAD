@@ -7,6 +7,7 @@ public abstract class Customer {
     protected String customerID;
     protected String address;
     protected List<Account> accounts;
+    protected String password;
 
     public Customer(String customerID, String address) {
         this.customerID = customerID;
@@ -17,6 +18,14 @@ public abstract class Customer {
     public String getCustomerId() { return customerID; }
     public String getAddress() { return address; }
     public List<Account> getAccounts() { return accounts; }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void addAccount(Account account) {
         accounts.add(account);

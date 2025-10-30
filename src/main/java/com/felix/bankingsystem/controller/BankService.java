@@ -23,6 +23,10 @@ public class BankService {
         System.out.println("Customer added: " + customer.getDisplayName());
     }
 
+    public Customer getCustomerById(String customerId) {
+        return customers.get(customerId);
+    }
+
     public Customer findCustomer(String customerId) {
         return customers.get(customerId);
     }

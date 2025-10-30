@@ -4,20 +4,36 @@ import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.model.IndividualCustomer;
 
 public class Authenticator {
-    private final String username;
+    private final String identifier;
     private final String password;
+    private final BankService bankService;
 
-    public Authenticator(String username, String password) {
-        this.username = username;
+    public Authenticator(String identifier, String password, BankService bankService) {
+        this.identifier = identifier;
         this.password = password;
+        this.bankService = bankService;
     }
 
     public Customer login() {
-        // TODO: Add actual authentication logic, for now just a dummy example:
-        if (username.equals("admin") && password.equals("1234")) {
-            return new IndividualCustomer("001", "Admin", "Admin St", "hjv", "9897", "45678", "dyuf");
-        } else {
-            return null;
+        if (bankService == null) {
+            throw new IllegalStateException("BankService is not initialized");
         }
+
+        // Check individuals by email
+        for (Customer c : bankService.getAllCustomers()) {
+            if (c instanceof IndividualCustomer ind) {
+                if (ind.getEmail().equalsIgnoreCase(identifier)
+                        && ind.getPassword().equals(password)) {
+                    return ind; //Individual login successful
+                }
+            }
+        }
+
+        // Check organizations by CustomerID
+        Customer org = bankService.getCustomerById(identifier);
+        if (org != null && org.getPassword().equals(password)) {
+            return org; //Organization login successful
+        }
+        return null;
     }
 }

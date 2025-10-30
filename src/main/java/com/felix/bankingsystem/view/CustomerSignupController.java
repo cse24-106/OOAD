@@ -2,6 +2,7 @@ package com.felix.bankingsystem.view;
 
 import com.felix.bankingsystem.controller.BankService ;
 import com.felix.bankingsystem.model.IndividualCustomer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +36,9 @@ public class CustomerSignupController {
     private TextField number_txt;
 
     @FXML
+    private TextField password_txt;
+
+    @FXML
     private Button signup_btn;
 
     @FXML
@@ -55,7 +59,13 @@ public class CustomerSignupController {
         CustomerID.setText(customerId);
 
         // Set up signup button action
-        signup_btn.setOnAction(e -> handleSignup());
+        signup_btn.setOnAction(event -> {
+            try {
+                Signup(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         return_to_login_btn.setOnAction(e -> returnToLogin());
     }
 
@@ -68,7 +78,12 @@ public class CustomerSignupController {
     }
 
     @FXML
-    private void handleSignup() {
+    private void Signup(ActionEvent event) throws IOException {
+        handleSignup(event);
+    }
+
+    @FXML
+    private void handleSignup(ActionEvent event) throws IOException {
         String firstName = firstname_txt.getText().trim();
         String surname = surname_txt.getText().trim();
         String nationalId = nationalID_txt.getText().trim();
@@ -77,6 +92,7 @@ public class CustomerSignupController {
         String email = email_txt.getText().trim();
         String customerId = CustomerID.getText();
         String source_of_funds = source_of_funds_txt.getText();
+        String password = password_txt.getText().trim();
 
         // Validate input
         if (!validateInput(firstName, surname, nationalId, address, phone, email)) {
@@ -87,6 +103,7 @@ public class CustomerSignupController {
             // Create new individual customer
             IndividualCustomer customer = new IndividualCustomer(customerId, firstName, surname, address, phone, email, source_of_funds);
             customer.setNationalID(nationalId);
+            customer.setPassword(password);
 
             // Add customer to bank service
             if (bankService != null) {
@@ -96,7 +113,7 @@ public class CustomerSignupController {
             showAlert(Alert.AlertType.INFORMATION, "Success",
                     "Individual customer registered successfully!\nCustomer ID: " + customerId);
 
-            // Return to login screen
+            // Return to log in screen
             returnToLogin();
 
         } catch (Exception e) {

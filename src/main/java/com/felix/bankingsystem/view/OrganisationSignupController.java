@@ -35,6 +35,9 @@ public class OrganisationSignupController {
     private TextField Registrationnum_txt;
 
     @FXML
+    private TextField password_txt;
+
+    @FXML
     private TextField number_txt1;
 
     @FXML
@@ -78,6 +81,7 @@ public class OrganisationSignupController {
         String customerId = CustomerID.getText();
         String tax_ID = tax_ID_txt.getText();
         String incoporation_Date = incoporation_date.getText();
+        String password = password_txt.getText().trim();
 
         // Validate input
         if (!validateInput(companyName, registrationNumber, address, contactPerson, phone, tax_ID, incoporation_Date)) {
@@ -87,6 +91,7 @@ public class OrganisationSignupController {
         try {
             // Create new company customer
             CompanyCustomer company = new CompanyCustomer(customerId, companyName, registrationNumber, address, contactPerson, phone, tax_ID, incoporation_Date);
+            company.setPassword(password_txt.getText());
 
             // Add company to bank service
             if (bankService != null) {
@@ -96,7 +101,7 @@ public class OrganisationSignupController {
             showAlert(Alert.AlertType.INFORMATION, "Success",
                     "Organization registered successfully!\nCustomer ID: " + customerId);
 
-            // Return to login screen
+            // Return to log in screen
             returnToLogin();
 
         } catch (Exception e) {
