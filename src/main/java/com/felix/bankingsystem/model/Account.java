@@ -1,7 +1,6 @@
 package com.felix.bankingsystem.model;
 
 import javafx.beans.value.ObservableValue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +19,8 @@ public abstract class Account {
         this.customer = customer;
     }
 
-    public void deposit(double amount) {
-        if (amount > 0){
-            balance += amount;
-        }
+    public double deposit(double amount) {
+        return amount;
     }
 
     public double getBalance() {
@@ -47,4 +44,7 @@ public abstract class Account {
     public abstract ObservableValue<String> accountNumberProperty();
 
 
+    public double withdraw(double amount) {
+        return amount;
+    }
 }

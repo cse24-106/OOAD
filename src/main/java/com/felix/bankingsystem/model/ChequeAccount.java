@@ -36,6 +36,14 @@ public class ChequeAccount extends Account implements Withdraw {
     }
 
     @Override
+    public double deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+        return amount;
+    }
+
+    @Override
     public ObservableValue<String> accountNumberProperty() {
         return null;
     }
