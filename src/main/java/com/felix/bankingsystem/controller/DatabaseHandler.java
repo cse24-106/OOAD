@@ -14,7 +14,7 @@ public class DatabaseHandler {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Customers_Details))) {
             for (Customer c : customers) {
                 if (c instanceof IndividualCustomer ic) {
-                    writer.write(String.format("IND,%s,%s,%s,%s,%s,%s,%s,%s",
+                    writer.write(String.format("IND,%s,%s,%s,%s,%s,%s,%s,%s,%s",
                             ic.getCustomerId(),
                             ic.getFirstName(),
                             ic.getSurname(),
@@ -22,6 +22,7 @@ public class DatabaseHandler {
                             ic.getAddress(),
                             ic.getPhoneNumber(),
                             ic.getEmail(),
+                            ic.getSourceOfFunds(),
                             ic.getPassword()));
                 } else if (c instanceof CompanyCustomer cc) {
                     writer.write(String.format("ORG,%s,%s,%s,%s,%s,%s,%s,%s,%s",

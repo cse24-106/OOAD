@@ -33,6 +33,8 @@ public class CustomerTypeController {
             // Load individual customer registration screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/CustomerSignup.fxml"));
             Parent root = loader.load();
+            CustomerSignupController controller = loader.getController();
+            controller.setBankService(bankService);
 
             Stage stage = (Stage) Individual_btn.getScene().getWindow();
             Scene scene = new Scene(root);

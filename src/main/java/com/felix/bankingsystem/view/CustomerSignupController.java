@@ -2,7 +2,6 @@ package com.felix.bankingsystem.view;
 
 import com.felix.bankingsystem.controller.BankService ;
 import com.felix.bankingsystem.model.IndividualCustomer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,18 +58,8 @@ public class CustomerSignupController {
         CustomerID.setText(customerId);
 
         // Set up signup button action
-        signup_btn.setOnAction(event -> {
-            try {
-                Signup(event);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        signup_btn.setOnAction(event -> handleSignup());
         return_to_login_btn.setOnAction(e -> returnToLogin());
-    }
-
-    public void setBankService(BankService bankService) {
-        this.bankService = bankService;
     }
 
     private String generateCustomerId() {
@@ -78,12 +67,7 @@ public class CustomerSignupController {
     }
 
     @FXML
-    private void Signup(ActionEvent event) throws IOException {
-        handleSignup(event);
-    }
-
-    @FXML
-    private void handleSignup(ActionEvent event) throws IOException {
+    private void handleSignup() {
         String firstName = firstname_txt.getText().trim();
         String surname = surname_txt.getText().trim();
         String nationalId = nationalID_txt.getText().trim();
@@ -95,7 +79,7 @@ public class CustomerSignupController {
         String password = password_txt.getText().trim();
 
         // Validate input
-        if (!validateInput(firstName, surname, nationalId, address, phone, email)) {
+        if (!validateInput(firstName, surname, nationalId, address, phone, email, source_of_funds)) {
             return;
         }
 
@@ -124,9 +108,9 @@ public class CustomerSignupController {
     }
 
     private boolean validateInput(String firstName, String surname, String nationalId,
-                                  String address, String phone, String email) {
+                                  String address, String phone, String email, String source_of_funds) {
         if (firstName.isEmpty() || surname.isEmpty() || nationalId.isEmpty() ||
-                address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+                address.isEmpty() || phone.isEmpty() || email.isEmpty() || source_of_funds.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Validation Error",
                     "Please fill in all fields");
             return false;
@@ -138,8 +122,11 @@ public class CustomerSignupController {
                     "Please enter a valid email address");
             return false;
         }
-
         return true;
+    }
+
+    public void setBankService(BankService bankService) {
+        this.bankService = bankService;
     }
 
     @FXML
