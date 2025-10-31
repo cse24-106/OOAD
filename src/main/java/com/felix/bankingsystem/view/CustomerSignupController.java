@@ -57,6 +57,8 @@ public class CustomerSignupController {
         String customerId = generateCustomerId();
         CustomerID.setText(customerId);
 
+        bankService = new BankService();
+
         // Set up signup button action
         signup_btn.setOnAction(event -> handleSignup());
         return_to_login_btn.setOnAction(e -> returnToLogin());
@@ -123,10 +125,6 @@ public class CustomerSignupController {
             return false;
         }
         return true;
-    }
-
-    public void setBankService(BankService bankService) {
-        this.bankService = bankService;
     }
 
     @FXML
