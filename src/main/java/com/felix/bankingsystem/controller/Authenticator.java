@@ -28,7 +28,7 @@ public class Authenticator {
             }
         }
 
-        // Try to find organization by CustomerID
+        // Try by CustomerID
         Customer org = customers.get(identifier);
         if (org != null && org.getPassword().equals(password)) {
             return org;

@@ -8,16 +8,9 @@ public class IndividualCustomer extends Customer {
     private String phoneNumber;
     private String email;
     private String source_of_funds;
+    private String password;
 
-    public String getSource_of_funds() {
-        return source_of_funds;
-    }
-
-    public void setSource_of_funds(String source_of_funds) {
-        this.source_of_funds = source_of_funds;
-    }
-
-    public IndividualCustomer(String customerID, String address, String firstName, String surname, String nationalID, String phoneNumber, String email) {
+    public IndividualCustomer(String customerID, String firstName, String surname, String nationalID, String address, String phoneNumber, String email, String source_of_funds,String password) {
         super(customerID, address);
         this.firstName = firstName;
         this.surname = surname;
@@ -25,6 +18,8 @@ public class IndividualCustomer extends Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.source_of_funds = source_of_funds;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -35,12 +30,12 @@ public class IndividualCustomer extends Customer {
         return surname;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public String getNationalID() {
         return nationalID;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public String getPhoneNumber() {
@@ -53,6 +48,10 @@ public class IndividualCustomer extends Customer {
 
     public String getSourceOfFunds() {
         return source_of_funds;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

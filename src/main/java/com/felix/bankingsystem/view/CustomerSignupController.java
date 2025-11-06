@@ -81,13 +81,13 @@ public class CustomerSignupController {
         String password = password_txt.getText().trim();
 
         // Validate input
-        if (!validateInput(firstName, surname, nationalId, address, phone, email, source_of_funds)) {
+        if (!validateInput(firstName, surname, nationalId, address, phone, email, source_of_funds, password)) {
             return;
         }
 
         try {
             // Create new individual customer
-            IndividualCustomer customer = new IndividualCustomer(customerId, firstName, surname, address, phone, email, source_of_funds);
+            IndividualCustomer customer = new IndividualCustomer(customerId, firstName, surname, nationalId, address, phone, email, source_of_funds, password);
             customer.setNationalID(nationalId);
             customer.setPassword(password_txt.getText());
 
@@ -110,9 +110,9 @@ public class CustomerSignupController {
     }
 
     private boolean validateInput(String firstName, String surname, String nationalId,
-                                  String address, String phone, String email, String source_of_funds) {
+                                  String address, String phone, String email, String source_of_funds, String password) {
         if (firstName.isEmpty() || surname.isEmpty() || nationalId.isEmpty() ||
-                address.isEmpty() || phone.isEmpty() || email.isEmpty() || source_of_funds.isEmpty()) {
+                address.isEmpty() || phone.isEmpty() || email.isEmpty() || source_of_funds.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Validation Error",
                     "Please fill in all fields");
             return false;
