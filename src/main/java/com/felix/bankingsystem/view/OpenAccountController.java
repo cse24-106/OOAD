@@ -97,7 +97,7 @@ public class OpenAccountController {
                 case "Cheque Account":
                     ChequeAccount chequeAccount = new ChequeAccount(
                             generateAccountNumber(), 0.0, customer,
-                            "N/A", "N/A"); // You might want to collect company info
+                            "N/A", "N/A"); // TODO: You might want to collect company info
                     customer.addAccount(chequeAccount);
                     break;
             }
@@ -136,12 +136,12 @@ public class OpenAccountController {
 
     @FXML
     private void showPersonalDetailsScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/Personaldetails.fxml", "Personal Details");
+        navigateTo("/com/felix/bankingsystem/FXML files/PersonalDetails.fxml", "Personal Details");
     }
 
     @FXML
     private void showTransactionHistoryScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/TransactionHistory.fxml", "Transaction History");
+        navigateTo("/com/felix/bankingsystem/FXML files/TransationHistory.fxml", "Transaction History");
     }
 
     private void navigateTo(String fxmlPath, String title) {
@@ -176,7 +176,7 @@ public class OpenAccountController {
     @FXML
     private void logout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/LoginView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) logout_btn.getScene().getWindow();

@@ -143,12 +143,12 @@ public class TransactionHistoryController {
 
     @FXML
     private void showOpenAccountScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/Openaccount.fxml", "Open Account");
+        navigateTo("/com/felix/bankingsystem/FXML files/OpenAccount.fxml", "Open Account");
     }
 
     @FXML
     private void showPersonalDetailsScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/Personaldetails.fxml", "Personal Details");
+        navigateTo("/com/felix/bankingsystem/FXML files/PersonalDetails.fxml", "Personal Details");
     }
 
     @FXML
@@ -159,7 +159,7 @@ public class TransactionHistoryController {
     @FXML
     private void logout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/LoginView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) logout_btn.getScene().getWindow();

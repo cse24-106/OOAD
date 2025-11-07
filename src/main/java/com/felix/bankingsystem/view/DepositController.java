@@ -183,17 +183,17 @@ public class DepositController {
 
     @FXML
     private void showOpenAccountScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/Openaccount.fxml", "Open Account");
+        navigateTo("/com/felix/bankingsystem/FXML files/OpenAccount.fxml", "Open Account");
     }
 
     @FXML
     private void showPersonalDetailsScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/Personaldetails.fxml", "Personal Details");
+        navigateTo("/com/felix/bankingsystem/FXML files/PersonalDetails.fxml", "Personal Details");
     }
 
     @FXML
     private void showTransactionHistoryScreen() {
-        navigateTo("/com/felix/bankingsystem/FXML files/TransactionHistory.fxml", "Transaction History");
+        navigateTo("/com/felix/bankingsystem/FXML files/TransationHistory.fxml", "Transaction History");
     }
 
     @FXML
@@ -225,7 +225,7 @@ public class DepositController {
     @FXML
     private void logout() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/felix/bankingsystem/FXML files/LoginView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) logout_btn.getScene().getWindow();
