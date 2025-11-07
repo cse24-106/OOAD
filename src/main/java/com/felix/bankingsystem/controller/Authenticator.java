@@ -21,7 +21,7 @@ public class Authenticator {
         // Try to find individual by email
         for (Customer c : customers.values()) {
             if (c instanceof IndividualCustomer ind) {
-                if (ind.getEmail().equalsIgnoreCase(identifier)
+                if (ind.getEmail() != null && ind.getEmail().equalsIgnoreCase(identifier)
                         && ind.getPassword().equals(password)) {
                     return ind;
                 }

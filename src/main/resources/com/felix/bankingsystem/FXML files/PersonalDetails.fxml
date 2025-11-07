@@ -80,7 +80,7 @@
                   <Insets bottom="10.0" left="10.0" />
                </BorderPane.margin>
                <children>
-                  <GridPane alignment="CENTER" disable="true" layoutX="112.0" layoutY="27.0" prefHeight="390.0" prefWidth="480.0">
+                  <GridPane alignment="CENTER" layoutX="112.0" layoutY="27.0" prefHeight="390.0" prefWidth="480.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
