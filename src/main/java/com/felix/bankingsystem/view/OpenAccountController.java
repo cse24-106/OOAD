@@ -1,9 +1,6 @@
 package com.felix.bankingsystem.view;
 
-import com.felix.bankingsystem.model.Customer;
-import com.felix.bankingsystem.model.SavingsAccount;
-import com.felix.bankingsystem.model.InvestmentAccount;
-import com.felix.bankingsystem.model.ChequeAccount;
+import com.felix.bankingsystem.model.*;
 import com.felix.bankingsystem.controller.BankService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +22,6 @@ public class OpenAccountController {
     @FXML private Button transaction_hist_btn;
     @FXML private Button logout_btn;
     @FXML private Button withdraw_btn;
-
 
     private Customer customer;
     private BankService bankService;
@@ -73,6 +69,11 @@ public class OpenAccountController {
 
     @FXML
     private void handleOpenAccount() {
+        if (customer == null) {
+            showAlert("Error", "No active customer session found!");
+            return;
+        }
+
         String accountType = accountTypeChoiceBox.getValue();
 
         if (accountType == null) {
@@ -86,6 +87,7 @@ public class OpenAccountController {
                     SavingsAccount savingsAccount = new SavingsAccount(
                             generateAccountNumber(), customer, 50.0);
                     customer.addAccount(savingsAccount);
+                    bankService.openSavingsAccount(customer, generateAccountNumber(), 50.0);
                     break;
 
                 case "Investment Account":
@@ -107,6 +109,7 @@ public class OpenAccountController {
 
         } catch (Exception e) {
             showAlert("Error", "Failed to open account: " + e.getMessage());
+            System.out.println("Failed to open account: " + e.getMessage());
         }
     }
 
@@ -169,8 +172,19 @@ public class OpenAccountController {
         } else if (controller instanceof DepositController) {
             ((DepositController) controller).setCustomer(customer);
             ((DepositController) controller).setBankService(bankService);
+        } else if (controller instanceof WithdrawController) {
+            ((WithdrawController) controller).setCustomer(customer);
+            ((WithdrawController) controller).setBankService(bankService);
+        } else if (controller instanceof TransactionHistoryController) {
+            ((TransactionHistoryController) controller).setCustomer(customer);
+            ((TransactionHistoryController) controller).setBankService(bankService);
+        } else if (controller instanceof OpenAccountController) {
+            ((OpenAccountController) controller).setCustomer(customer);
+            ((OpenAccountController) controller).setBankService(bankService);
+        }  else if (controller instanceof PersonalDetailsController) {
+            ((PersonalDetailsController) controller).setCustomer(customer);
+            ((PersonalDetailsController) controller).setBankService(bankService);
         }
-        // Add other controllers as needed
     }
 
     @FXML

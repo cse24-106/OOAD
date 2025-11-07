@@ -11,46 +11,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class OrganisationSignupController {
 
-    @FXML
-    private TextField Address_txt;
-
-    @FXML
-    private TextField Contact_person_txt1;
-
-    @FXML
-    private Label CustomerID;
-
-    @FXML
-    private TextField Orgname_txt;
-
-    @FXML
-    private Label Phonenum_txt;
-
-    @FXML
-    private TextField Registrationnum_txt;
-
-    @FXML
-    private TextField password_txt;
-
-    @FXML
-    private TextField number_txt1;
-
-    @FXML
-    private Button signup_btn;
-
-    @FXML
-    private TextField incoporation_date;
-
-    @FXML
-    private TextField tax_ID_txt;
-
-    @FXML
-    private Button return_to_login;
+    @FXML private TextField Address_txt;
+    @FXML private TextField Contact_person_txt1;
+    @FXML private Label CustomerID;
+    @FXML private TextField Orgname_txt;
+    @FXML private Label Phonenum_txt;
+    @FXML private TextField Registrationnum_txt;
+    @FXML private TextField password_txt;
+    @FXML private TextField number_txt1;
+    @FXML private Button signup_btn;
+    @FXML private TextField incoporation_date;
+    @FXML private TextField tax_ID_txt;
+    @FXML private Button return_to_login;
 
     private BankService bankService;
 
@@ -61,13 +37,11 @@ public class OrganisationSignupController {
 
         bankService = new BankService();
 
-        // Set up signup button action
         signup_btn.setOnAction(e -> handleSignup());
         return_to_login.setOnAction(e -> returnToLogin());
     }
 
     private String generateCustomerId() {
-        // Generate a unique customer ID for organization
         return "ORG" + System.currentTimeMillis();
     }
 

@@ -202,16 +202,8 @@ public class DepositController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            // Set customer and bank service for the new controller
             Object controller = loader.getController();
-            if (controller instanceof DashboardController) {
-                ((DashboardController) controller).setCustomer(customer);
-                ((DashboardController) controller).setBankService(bankService);
-            } else if (controller instanceof DepositController) {
-                ((DepositController) controller).setCustomer(customer);
-                ((DepositController) controller).setBankService(bankService);
-            }
-            // Add other controller types as needed...
+            setControllerProperties(controller);
 
             Stage stage = (Stage) dashboard_btn.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -219,6 +211,28 @@ public class DepositController {
 
         } catch (IOException e) {
             showAlert("Error", "Cannot navigate: " + e.getMessage());
+        }
+    }
+
+    private void setControllerProperties(Object controller) {
+        if (controller instanceof DashboardController) {
+            ((DashboardController) controller).setCustomer(customer);
+            ((DashboardController) controller).setBankService(bankService);
+        } else if (controller instanceof DepositController) {
+            ((DepositController) controller).setCustomer(customer);
+            ((DepositController) controller).setBankService(bankService);
+        } else if (controller instanceof WithdrawController) {
+            ((WithdrawController) controller).setCustomer(customer);
+            ((WithdrawController) controller).setBankService(bankService);
+        } else if (controller instanceof TransactionHistoryController) {
+            ((TransactionHistoryController) controller).setCustomer(customer);
+            ((TransactionHistoryController) controller).setBankService(bankService);
+        } else if (controller instanceof OpenAccountController) {
+            ((OpenAccountController) controller).setCustomer(customer);
+            ((OpenAccountController) controller).setBankService(bankService);
+        }  else if (controller instanceof PersonalDetailsController) {
+            ((PersonalDetailsController) controller).setCustomer(customer);
+            ((PersonalDetailsController) controller).setBankService(bankService);
         }
     }
 

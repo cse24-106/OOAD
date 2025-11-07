@@ -47,10 +47,6 @@ public abstract class Customer {
         }
     }
 
-    public void withdrawFromAccount(String accountNumber, double amount) {
-
-    }
-
     public abstract String getDisplayName();
 
     public void setNationalID(String nationalId) {

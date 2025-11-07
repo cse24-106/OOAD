@@ -48,7 +48,6 @@ public class WithdrawController {
 
     private Customer customer;
     private BankService bankService;
-    private Account selectedAccount;
 
     @FXML
     private void initialize() {
@@ -97,7 +96,7 @@ public class WithdrawController {
 
             // For simplicity, withdraw from first account
             if (!customer.getAccounts().isEmpty()) {
-                selectedAccount = customer.getAccounts().get(0);
+                Account selectedAccount = customer.getAccounts().get(0);
 
                 // Check sufficient balance
                 if (selectedAccount.getBalance() < amount) {
@@ -200,6 +199,18 @@ public class WithdrawController {
         } else if (controller instanceof DepositController) {
             ((DepositController) controller).setCustomer(customer);
             ((DepositController) controller).setBankService(bankService);
+        } else if (controller instanceof WithdrawController) {
+            ((WithdrawController) controller).setCustomer(customer);
+            ((WithdrawController) controller).setBankService(bankService);
+        } else if (controller instanceof TransactionHistoryController) {
+            ((TransactionHistoryController) controller).setCustomer(customer);
+            ((TransactionHistoryController) controller).setBankService(bankService);
+        } else if (controller instanceof OpenAccountController) {
+            ((OpenAccountController) controller).setCustomer(customer);
+            ((OpenAccountController) controller).setBankService(bankService);
+        }  else if (controller instanceof PersonalDetailsController) {
+            ((PersonalDetailsController) controller).setCustomer(customer);
+            ((PersonalDetailsController) controller).setBankService(bankService);
         }
     }
 

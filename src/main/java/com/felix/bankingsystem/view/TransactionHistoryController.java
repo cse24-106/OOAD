@@ -18,47 +18,20 @@ import java.util.Comparator;
 
 public class TransactionHistoryController {
 
-    @FXML
-    private Label Available_balance;
-
-    @FXML
-    private TableColumn<Transaction, Double> Dash_tranTable_amount;
-
-    @FXML
-    private TableColumn<Transaction, Double> Dash_tranTable_balance_after;
-
-    @FXML
-    private TableColumn<Transaction, String> Dash_tranTable_date;
-
-    @FXML
-    private TableColumn<Transaction, String> Dash_tranTable_tranID;
-
-    @FXML
-    private TableColumn<Transaction, String> Dash_tranTable_type;
-
-    @FXML
-    private TableView<Transaction> Dash_transactions_table;
-
-    @FXML
-    private Button dashboard_btn;
-
-    @FXML
-    private Button deposit_btn;
-
-    @FXML
-    private Button logout_btn;
-
-    @FXML
-    private Button open_acc_btn;
-
-    @FXML
-    private Button pers_det_btn;
-
-    @FXML
-    private Button transaction_hist_btn;
-
-    @FXML
-    private Button withdraw_btn;
+    @FXML private Label Available_balance;
+    @FXML private TableColumn<Transaction, Double> Dash_tranTable_amount;
+    @FXML private TableColumn<Transaction, Double> Dash_tranTable_balance_after;
+    @FXML private TableColumn<Transaction, String> Dash_tranTable_date;
+    @FXML private TableColumn<Transaction, String> Dash_tranTable_tranID;
+    @FXML private TableColumn<Transaction, String> Dash_tranTable_type;
+    @FXML private TableView<Transaction> Dash_transactions_table;
+    @FXML private Button dashboard_btn;
+    @FXML private Button deposit_btn;
+    @FXML private Button logout_btn;
+    @FXML private Button open_acc_btn;
+    @FXML private Button pers_det_btn;
+    @FXML private Button transaction_hist_btn;
+    @FXML private Button withdraw_btn;
 
     private Customer customer;
     private BankService bankService;
@@ -196,6 +169,18 @@ public class TransactionHistoryController {
         } else if (controller instanceof DepositController) {
             ((DepositController) controller).setCustomer(customer);
             ((DepositController) controller).setBankService(bankService);
+        } else if (controller instanceof WithdrawController) {
+            ((WithdrawController) controller).setCustomer(customer);
+            ((WithdrawController) controller).setBankService(bankService);
+        } else if (controller instanceof TransactionHistoryController) {
+            ((TransactionHistoryController) controller).setCustomer(customer);
+            ((TransactionHistoryController) controller).setBankService(bankService);
+        } else if (controller instanceof OpenAccountController) {
+            ((OpenAccountController) controller).setCustomer(customer);
+            ((OpenAccountController) controller).setBankService(bankService);
+        }  else if (controller instanceof PersonalDetailsController) {
+            ((PersonalDetailsController) controller).setCustomer(customer);
+            ((PersonalDetailsController) controller).setBankService(bankService);
         }
     }
 

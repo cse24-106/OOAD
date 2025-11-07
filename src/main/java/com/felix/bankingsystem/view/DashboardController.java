@@ -20,54 +20,33 @@ public class DashboardController {
 
     @FXML
     private Label Available_balance;
-
     @FXML
     private TableColumn<Account, String> Dash_accTable_accNum;
-
     @FXML
     private TableColumn<Account, Double> Dash_accTable_available_balance;
-
     @FXML
     private TableView<Account> Dash_accounts_table;
-
     @FXML
     private TableColumn<Transaction, Double> Dash_tranTable_amount;
-
     @FXML
     private TableColumn<Transaction, Double> Dash_tranTable_balance_after;
-
     @FXML
     private TableColumn<Transaction, String> Dash_tranTable_date;
-
     @FXML
     private TableColumn<Transaction, String> Dash_tranTable_type;
-
     @FXML
     private TableColumn<Transaction, String> Dash_tranTable_tranID;
-
     @FXML
     private TableView<Transaction> Dash_transactions_table;
-
     @FXML
     private Button dashboard_btn;
-
     @FXML
     private Button deposit_btn;
-
-    @FXML
-    private Button logout_btn;
-
-    @FXML
-    private Button open_acc_btn;
-
-    @FXML
-    private Button pers_det_btn;
-
-    @FXML
-    private Button transaction_hist_btn;
-
-    @FXML
-    private Button withdraw_btn;
+    @FXML private Button logout_btn;
+    @FXML private Button open_acc_btn;
+    @FXML private Button pers_det_btn;
+    @FXML private Button transaction_hist_btn;
+    @FXML private Button withdraw_btn;
 
     private Customer customer;
     private BankService bankService;
