@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class PersonalDetailsController {
 
+
     @FXML private Label Available_balance;
     @FXML private Label CustomerID;
     @FXML private Button Logout_btn;
@@ -35,6 +36,7 @@ public class PersonalDetailsController {
 
     private Customer customer;
     private BankService bankService;
+    public TextField incop_date_txt1;
 
     @FXML
     private void initialize() {
@@ -85,8 +87,7 @@ public class PersonalDetailsController {
             // Update customer details
             CustomerID.setText(customer.getCustomerId());
 
-            if (customer instanceof IndividualCustomer) {
-                IndividualCustomer indCustomer = (IndividualCustomer) customer;
+            if (customer instanceof IndividualCustomer indCustomer) {
                 firstname_txt.setText(indCustomer.getFirstName());
                 surname_txt.setText(indCustomer.getSurname());
                 nationalID_txt.setText(indCustomer.getNationalID());
@@ -96,8 +97,7 @@ public class PersonalDetailsController {
                 source_of_funds_txt.setText(indCustomer.getSourceOfFunds());
                 conatct_person_txt.setText("N/A");
 
-            } else if (customer instanceof CompanyCustomer) {
-                CompanyCustomer compCustomer = (CompanyCustomer) customer;
+            } else if (customer instanceof CompanyCustomer compCustomer) {
                 firstname_txt.setText(compCustomer.getCompanyName());
                 surname_txt.setText("N/A");
                 nationalID_txt.setText(compCustomer.getRegistrationNumber());
@@ -152,7 +152,7 @@ public class PersonalDetailsController {
             stage.centerOnScreen();
 
         } catch (IOException e) {
-            showAlert("Error", "Cannot logout: " + e.getMessage());
+            showAlert("Cannot logout: " + e.getMessage());
         }
     }
 
@@ -169,7 +169,7 @@ public class PersonalDetailsController {
             stage.setTitle(title);
 
         } catch (IOException e) {
-            showAlert("Error", "Cannot navigate: " + e.getMessage());
+            showAlert("Cannot navigate: " + e.getMessage());
         }
     }
 
@@ -195,9 +195,9 @@ public class PersonalDetailsController {
         }
     }
 
-    private void showAlert(String title, String message) {
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

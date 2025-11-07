@@ -56,7 +56,7 @@ public class TransactionHistoryController {
         Dash_tranTable_tranID.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTransactionID()));
         Dash_tranTable_date.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getDate().toString()));
+                new SimpleStringProperty(cellData.getValue().getDate()));
         Dash_tranTable_type.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getType()));
         Dash_tranTable_amount.setCellValueFactory(cellData ->
@@ -141,7 +141,7 @@ public class TransactionHistoryController {
             stage.centerOnScreen();
 
         } catch (IOException e) {
-            showAlert("Error", "Cannot logout: " + e.getMessage());
+            showAlert("Cannot logout: " + e.getMessage());
         }
     }
 
@@ -158,7 +158,7 @@ public class TransactionHistoryController {
             stage.setTitle(title);
 
         } catch (IOException e) {
-            showAlert("Error", "Cannot navigate: " + e.getMessage());
+            showAlert("Cannot navigate: " + e.getMessage());
         }
     }
 
@@ -184,9 +184,9 @@ public class TransactionHistoryController {
         }
     }
 
-    private void showAlert(String title, String message) {
+    private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

@@ -5,81 +5,86 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.OpenAccountController">
-   <children>
-      <BorderPane layoutX="200.0" layoutY="52.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-         <left>
-            <GridPane alignment="CENTER" prefHeight="520.0" prefWidth="165.0" BorderPane.alignment="CENTER">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button fx:id="open_acc_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" onAction="#showOpenAccountScreen" prefHeight="50.0" prefWidth="170.0" text="Open account" GridPane.rowIndex="4" />
-                  <Button fx:id="transaction_hist_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" onAction="#showTransactionHistoryScreen" prefHeight="50.0" prefWidth="170.0" text="Transaction history" GridPane.rowIndex="3" />
-                  <Button fx:id="withdraw_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false" onAction="#showWithdrawScreen" prefHeight="50.0" prefWidth="170.0" text="Withdraw funds" GridPane.rowIndex="2" />
-                  <Button fx:id="deposit_btn" mnemonicParsing="false" onAction="#showDepositScreen" prefHeight="50.0" prefWidth="171.0" text="Deposit funds" GridPane.rowIndex="1" />
-                  <Button fx:id="pers_det_btn" layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#showPersonalDetailsScreen" prefHeight="50.0" prefWidth="170.0" text="Personal details" GridPane.rowIndex="5" />
-                  <Button fx:id="dashboard_btn" layoutX="10.0" layoutY="69.0" mnemonicParsing="false" onAction="#showDashboard" prefHeight="50.0" prefWidth="170.0" text="Dashbaord" />
-               </children>
-            </GridPane>
-         </left>
-         <top>
-            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="879.0" spacing="110.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="159.0" text="Capital Bank">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="170.0" text="Open Account">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <AnchorPane prefHeight="54.0" prefWidth="246.0">
-                     <children>
-                        <Label layoutY="13.0" text="Available Balance:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="Available_balance" layoutX="142.0" layoutY="13.0" text="P00.00">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-            </HBox>
-         </top>
-         <bottom>
-            <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="100.0" text="Logout" BorderPane.alignment="CENTER" />
-         </bottom>
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" />
-               </BorderPane.margin>
-               <children>
-                  <Label layoutX="147.0" layoutY="158.0" text="Account type:" />
-                  <Label layoutX="14.0" layoutY="188.0" />
-                  <Button fx:id="Open_acc_btn" layoutX="216.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleOpenAccount" prefHeight="38.0" prefWidth="102.0" text="Open Account" />
-                  <ChoiceBox fx:id="accountTypeChoiceBox" layoutX="237.0" layoutY="154.0" prefWidth="150.0" />
-               </children>
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.OpenAccountController">
+   <BorderPane layoutX="200.0" layoutY="52.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0"
+               AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <left>
+         <GridPane alignment="CENTER" prefHeight="520.0" prefWidth="165.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <Button fx:id="open_acc_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false"
+                    onAction="#showOpenAccountScreen" prefHeight="50.0" prefWidth="170.0" text="Open account"
+                    GridPane.rowIndex="4"/>
+            <Button fx:id="transaction_hist_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false"
+                    onAction="#showTransactionHistoryScreen" prefHeight="50.0" prefWidth="170.0"
+                    text="Transaction history" GridPane.rowIndex="3"/>
+            <Button fx:id="withdraw_btn" layoutX="10.0" layoutY="29.0" mnemonicParsing="false"
+                    onAction="#showWithdrawScreen" prefHeight="50.0" prefWidth="170.0" text="Withdraw funds"
+                    GridPane.rowIndex="2"/>
+            <Button fx:id="deposit_btn" mnemonicParsing="false" onAction="#showDepositScreen" prefHeight="50.0"
+                    prefWidth="171.0" text="Deposit funds" GridPane.rowIndex="1"/>
+            <Button fx:id="pers_det_btn" layoutX="10.0" layoutY="168.0" mnemonicParsing="false"
+                    onAction="#showPersonalDetailsScreen" prefHeight="50.0" prefWidth="170.0" text="Personal details"
+                    GridPane.rowIndex="5"/>
+            <Button fx:id="dashboard_btn" layoutX="10.0" layoutY="69.0" mnemonicParsing="false"
+                    onAction="#showDashboard" prefHeight="50.0" prefWidth="170.0" text="Dashbaord"/>
+         </GridPane>
+      </left>
+      <top>
+         <HBox alignment="CENTER" prefHeight="54.0" prefWidth="879.0" spacing="110.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+               <Insets/>
+            </BorderPane.margin>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="159.0" text="Capital Bank">
+               <font>
+                  <Font name="System Bold" size="24.0"/>
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="170.0"
+                   text="Open Account">
+               <font>
+                  <Font name="System Bold" size="24.0"/>
+               </font>
+            </Label>
+            <AnchorPane prefHeight="54.0" prefWidth="246.0">
+               <Label layoutY="13.0" text="Available Balance:">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Label>
+               <Label fx:id="Available_balance" layoutX="142.0" layoutY="13.0" text="P00.00">
+                  <font>
+                     <Font size="18.0"/>
+                  </font>
+               </Label>
             </AnchorPane>
-         </center>
-      </BorderPane>
-   </children>
+         </HBox>
+      </top>
+      <bottom>
+         <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="100.0"
+                 text="Logout" BorderPane.alignment="CENTER"/>
+      </bottom>
+      <center>
+         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+               <Insets bottom="10.0" left="10.0"/>
+            </BorderPane.margin>
+            <Label layoutX="147.0" layoutY="158.0" text="Account type:"/>
+            <Label layoutX="14.0" layoutY="188.0"/>
+            <Button fx:id="Open_acc_btn" layoutX="216.0" layoutY="206.0" mnemonicParsing="false"
+                    onAction="#handleOpenAccount" prefHeight="38.0" prefWidth="102.0" text="Open Account"/>
+            <ChoiceBox fx:id="accountTypeChoiceBox" layoutX="237.0" layoutY="154.0" prefWidth="150.0"/>
+         </AnchorPane>
+      </center>
+   </BorderPane>
 </AnchorPane>

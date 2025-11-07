@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class OrganisationSignupController {
 
+
     @FXML private TextField Address_txt;
     @FXML private TextField Contact_person_txt1;
     @FXML private Label CustomerID;
@@ -29,6 +30,7 @@ public class OrganisationSignupController {
     @FXML private Button return_to_login;
 
     private BankService bankService;
+    public Label ContactPerson_txt;
 
     @FXML
     private void initialize() {

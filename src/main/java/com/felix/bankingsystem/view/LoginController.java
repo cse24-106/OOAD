@@ -58,7 +58,7 @@ public class LoginController {
         }
 
         @FXML
-        private void handleLogin(ActionEvent event) throws IOException {
+        private void handleLogin(ActionEvent event) {
                 String identifier = username_txt.getText();
                 String password = password_txt.getText();
 

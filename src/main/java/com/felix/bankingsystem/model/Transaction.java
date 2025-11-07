@@ -56,6 +56,6 @@ public class Transaction {
     @Override
     public String toString() {
         return String.format("[%s] %s - %.2f | Balance After: %.2f | Date: %s",
-                transactionID, type, amount, balanceAfter, date.toString());
+                transactionID, type, amount, balanceAfter, date);
     }
 }

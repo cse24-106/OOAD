@@ -138,20 +138,12 @@ public class DatabaseHandler {
                 Customer c = customers.get(customerId);
                 if (c == null) continue;
 
-                Account acc = null;
-                switch (type) {
-                    case "SavingsAccount":
-                        acc = new SavingsAccount(accNum, c, 0);
-                        break;
-
-                    case "InvestmentAccount":
-                        acc = new InvestmentAccount(accNum, c, 0);
-                        break;
-
-                    case "ChequeAccount":
-                        acc = new ChequeAccount(accNum, 0, c, "N/A", "N/A");
-                        break;
-                }
+                Account acc = switch (type) {
+                    case "SavingsAccount" -> new SavingsAccount(accNum, c, 0);
+                    case "InvestmentAccount" -> new InvestmentAccount(accNum, c, 0);
+                    case "ChequeAccount" -> new ChequeAccount(accNum, 0, c, "N/A", "N/A");
+                    default -> null;
+                };
                 if (acc != null) {
                     acc.deposit(amount);
                     c.addAccount(acc);

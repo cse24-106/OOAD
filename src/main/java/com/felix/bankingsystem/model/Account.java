@@ -19,8 +19,11 @@ public abstract class Account {
         this.customer = customer;
     }
 
-    public double deposit(double amount) {
-        return amount;
+    public void deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be greater than zero.");
+        }
+        balance += amount;
     }
 
     public double getBalance() {
@@ -44,7 +47,10 @@ public abstract class Account {
     public abstract ObservableValue<String> accountNumberProperty();
 
 
-    public double withdraw(double amount) {
-        return amount;
+    public void withdraw(double amount) {
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient balance.");
+        }
+        balance -= amount;
     }
 }

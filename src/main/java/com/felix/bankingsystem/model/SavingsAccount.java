@@ -10,7 +10,7 @@ public class SavingsAccount extends Account implements InterestPayable {
 
         if (initialDeposit < MIN_INITIAL_DEPOSIT) {
             throw new IllegalArgumentException(
-                    "Initial deposit for Investment Account must be at least P500.00."
+                    "Initial deposit for Savings Account must be at least P50.00."
             );
         } else {
             this.balance = initialDeposit;
@@ -18,11 +18,11 @@ public class SavingsAccount extends Account implements InterestPayable {
     }
 
     @Override
-    public double deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
+    public void deposit(double amount) {
+        if (amount < 50) {
+            throw new IllegalArgumentException("Minimum deposit for Savings Account is P50.00");
         }
-        return amount;
+        super.deposit(amount);
     }
 
     @Override

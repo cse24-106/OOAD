@@ -3,7 +3,6 @@ package com.felix.bankingsystem.model;
 import javafx.beans.value.ObservableValue;
 
 public class InvestmentAccount extends Account implements InterestPayable, Withdraw {
-    private double interestRate = 0.05;
     private static final double MIN_INITIAL_DEPOSIT = 500.00;
 
     public InvestmentAccount(String accountNumber, Customer customer, double initialDeposit) {
@@ -20,6 +19,7 @@ public class InvestmentAccount extends Account implements InterestPayable, Withd
 
     @Override
     public double calculateInterest() {
+        double interestRate = 0.05;
         return balance * interestRate;
     }
 
@@ -37,11 +37,11 @@ public class InvestmentAccount extends Account implements InterestPayable, Withd
     }
 
     @Override
-    public double deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
+    public void deposit(double amount) {
+        if (amount < 500) {
+            throw new IllegalArgumentException("Minimum deposit for Savings Account is P500.00");
         }
-        return amount;
+        super.deposit(amount);
     }
 
     @Override

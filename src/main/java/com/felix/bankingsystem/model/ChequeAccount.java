@@ -36,11 +36,11 @@ public class ChequeAccount extends Account implements Withdraw {
     }
 
     @Override
-    public double deposit(double amount) {
+    public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
         }
-        return amount;
+        super.deposit(amount);
     }
 
     @Override

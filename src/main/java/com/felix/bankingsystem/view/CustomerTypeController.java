@@ -18,8 +18,6 @@ public class CustomerTypeController {
     @FXML
     private Button Organisation_btn;
 
-    private BankService bankService;
-
     @FXML
     private void initialize() {
         // Set up button actions
@@ -64,6 +62,5 @@ public class CustomerTypeController {
     }
 
     public void setBankService(BankService bankService) {
-        this.bankService = bankService;
     }
 }

@@ -6,50 +6,31 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.CustomerTypeController">
-   <children>
-      <AnchorPane fx:id="CustomerType" layoutX="10.0" layoutY="10.0" prefHeight="481.0" prefWidth="866.0">
-         <children>
-            <Label layoutX="356.0" layoutY="140.0" text="Choose Customer type:">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <HBox layoutX="262.0" layoutY="189.0" prefHeight="52.0" prefWidth="342.0" spacing="60.0">
-               <children>
-                  <Button fx:id="Organisation_btn" mnemonicParsing="false" onAction="#handleOrganisationCustomer" prefHeight="42.0" prefWidth="140.0" text="Organisation/Company Customer" wrapText="true" />
-                  <Button fx:id="Individual_btn" mnemonicParsing="false" onAction="#handleIndividualCustomer" prefHeight="42.0" prefWidth="140.0" text=" Individual Customer" wrapText="true" />
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="879.0" spacing="110.0">
-         <children>
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="159.0" text="Capital Bank">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label prefHeight="35.0" prefWidth="260.0" text="Customer Registration">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <AnchorPane prefHeight="54.0" prefWidth="56.0">
-               <children>
-                  <Label layoutY="13.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cust_name_txt" layoutX="80.0" layoutY="13.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.CustomerTypeController">
+   <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="481.0" prefWidth="866.0">
+      <Label layoutX="356.0" layoutY="140.0" text="Choose Customer type:">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Label>
+      <HBox layoutX="262.0" layoutY="189.0" prefHeight="52.0" prefWidth="342.0" spacing="60.0">
+         <Button fx:id="Organisation_btn" mnemonicParsing="false" onAction="#handleOrganisationCustomer"
+                 prefHeight="42.0" prefWidth="140.0" text="Organisation/Company Customer" wrapText="true"/>
+         <Button fx:id="Individual_btn" mnemonicParsing="false" onAction="#handleIndividualCustomer"
+                 prefHeight="42.0" prefWidth="140.0" text=" Individual Customer" wrapText="true"/>
       </HBox>
-   </children>
+   </AnchorPane>
+   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="879.0" spacing="110.0">
+      <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="159.0" text="Capital Bank">
+         <font>
+            <Font name="System Bold" size="24.0"/>
+         </font>
+      </Label>
+      <Label prefHeight="35.0" prefWidth="260.0" text="Customer Registration">
+         <font>
+            <Font name="System Bold" size="24.0"/>
+         </font>
+      </Label>
+   </HBox>
 </AnchorPane>

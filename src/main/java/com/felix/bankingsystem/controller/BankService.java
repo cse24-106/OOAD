@@ -24,67 +24,18 @@ public class BankService {
         System.out.println("Customer added: " + customer.getDisplayName());
     }
 
-    public Customer getCustomerById(String customerId) {
-        return customers.get(customerId);
-    }
+    public void depositIntoAccount(Customer customer, Account account, double amount) {
 
-    public Customer findCustomer(String customerId) {
-        return customers.get(customerId);
-    }
-
-    public List<Customer> getAllCustomers() {
-        return new ArrayList<>(customers.values());
-    }
-
-
-    public void openInvestmentAccount(Customer customer, String accountNumber, double initialDeposit) {
-        try {
-            InvestmentAccount account = new InvestmentAccount(accountNumber, customer, initialDeposit);
-            customer.openAccount(account);
-            saveAllData();
-
-            // Show success alert
-            showAlert(Alert.AlertType.INFORMATION, "Success",
-                    "Investment account created successfully!");
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Deposit", e.getMessage());
-        }
-    }
-
-    public void openSavingsAccount(Customer customer, String accountNumber, double initialDeposit) {
-        try {
-            SavingsAccount account = new SavingsAccount(accountNumber, customer, initialDeposit);
-            customer.openAccount(account);
-            saveAllData();
-
-            showAlert(Alert.AlertType.INFORMATION, "Success",
-                    "Savings account created successfully!");
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
-        }
-    }
-
-    public void openChequeAccount(Customer customer, String accountNumber, String employer, String employerAddress) {
-        try {
-            ChequeAccount account = new ChequeAccount(accountNumber, 0.0, customer, employer, employerAddress);
-            customer.openAccount(account);
-            saveAllData();
-
-            showAlert(Alert.AlertType.INFORMATION, "Success",
-                    "Cheque account created successfully!");
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
-        }
-    }
-
-
-    public void deposit(Customer customer, double amount) {
         if (customer.getAccounts().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Deposit Failed", "No account found for deposit.");
             return;
         }
 
-        Account account = customer.getAccounts().get(0);
+        if (amount <= 0) {
+            showAlert(Alert.AlertType.ERROR, "Deposit Failed", "Deposit amount must be greater than zero.");
+            return;
+        }
+
         account.deposit(amount);
 
         Transaction transaction = new Transaction(
@@ -103,25 +54,13 @@ public class BankService {
     }
 
 
-    public void withdraw(Customer customer, double amount) {
-        if (customer.getAccounts().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Withdraw Failed", "No account found for withdrawal.");
-            return;
-        }
-
-        Account account = customer.getAccounts().get(0);
-
-        if (amount <= 0) {
-            showAlert(Alert.AlertType.ERROR, "Withdraw Failed", "Amount must be greater than 0.");
-            return;
-        }
-
-        if (account.getBalance() < amount) {
-            showAlert(Alert.AlertType.ERROR, "Withdraw Failed", "Insufficient funds.");
-            return;
-        }
-
+    public void withdrawFromAccount(Customer customer, Account account, double amount) {
         account.withdraw(amount);
+
+        if (customer.getAccounts().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Withdrawal Failed", "No account found for withdrawal.");
+            return;
+        }
 
         Transaction transaction = new Transaction(
                 "T" + System.currentTimeMillis(),
@@ -139,7 +78,7 @@ public class BankService {
     }
 
 
-    private void saveAllData() {
+    public void saveAllData() {
         database.saveCustomers(customers.values());
         database.saveAccounts(customers.values());
         database.saveTransactions(customers.values());

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Optional;
 
 public class OpenAccountController {
 
@@ -61,7 +62,7 @@ public class OpenAccountController {
     private void updateBalance() {
         if (customer != null) {
             double totalBalance = customer.getAccounts().stream()
-                    .mapToDouble(account -> account.getBalance())
+                    .mapToDouble(Account::getBalance)
                     .sum();
             Available_balance.setText(String.format("P%.2f", totalBalance));
         }
@@ -82,26 +83,60 @@ public class OpenAccountController {
         }
 
         try {
+            System.out.println("Account type selected: [" + accountType + "]");
             switch (accountType) {
                 case "Savings Account":
+                    Double savingsInitialDeposit = showDepositInputDialog(
+                            "Savings Account Initial Deposit",
+                            "Enter Initial Deposit (Should be P50.00 or more)"
+                    );
+
+                    if (savingsInitialDeposit == null) {
+                        showAlert("Cancelled", "Account creation cancelled.");
+                    }
+
                     SavingsAccount savingsAccount = new SavingsAccount(
-                            generateAccountNumber(), customer, 50.0);
+                            generateAccountNumber(), customer, savingsInitialDeposit);
                     customer.addAccount(savingsAccount);
-                    bankService.openSavingsAccount(customer, generateAccountNumber(), 50.0);
                     break;
 
                 case "Investment Account":
+                    Double investmentInitialDeposit = showDepositInputDialog(
+                            "Investment Account Initial Deposit",
+                            "Enter Initial Deposit (Should be P500.00 or more)"
+                    );
+
+                    if (investmentInitialDeposit == null) {
+                        showAlert("Cancelled", "Account creation cancelled.");
+                    }
+
                     InvestmentAccount investmentAccount = new InvestmentAccount(
-                                                generateAccountNumber(), customer, 500.0);
+                            generateAccountNumber(), customer, investmentInitialDeposit);
                     customer.addAccount(investmentAccount);
                     break;
 
                 case "Cheque Account":
+                    TextInputDialog companyDialog = new TextInputDialog();
+                    companyDialog.setTitle("Company Information");
+                    companyDialog.setHeaderText("Enter Company Name");
+                    companyDialog.setContentText("Company Name:");
+                    String companyName = companyDialog.showAndWait().orElse("N/A");
+
+                    TextInputDialog regDialog = new TextInputDialog();
+                    regDialog.setTitle("Company Information");
+                    regDialog.setHeaderText("Enter Registration Number");
+                    regDialog.setContentText("Registration Number:");
+                    String registrationNumber = regDialog.showAndWait().orElse("N/A");
+
                     ChequeAccount chequeAccount = new ChequeAccount(
                             generateAccountNumber(), 0.0, customer,
-                            "N/A", "N/A"); // TODO: You might want to collect company info
+                            "N/A", "N/A");
                     customer.addAccount(chequeAccount);
                     break;
+            }
+
+            if (bankService != null) {
+                bankService.saveAllData();
             }
 
             showAlert("Success", accountType + " opened successfully!");
@@ -111,6 +146,24 @@ public class OpenAccountController {
             showAlert("Error", "Failed to open account: " + e.getMessage());
             System.out.println("Failed to open account: " + e.getMessage());
         }
+    }
+
+    private Double showDepositInputDialog(String title, String header) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+        dialog.setContentText("Initial deposit amount:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        if (result.isPresent()) {
+            try {
+                return Double.parseDouble(result.get());
+            } catch (NumberFormatException e) {
+                showAlert("Error", "Please enter a valid deposit amount");
+            }
+        }
+        return null;
     }
 
     private String generateAccountNumber() {

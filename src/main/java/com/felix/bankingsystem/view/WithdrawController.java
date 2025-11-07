@@ -2,7 +2,6 @@ package com.felix.bankingsystem.view;
 
 import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.model.Account;
-import com.felix.bankingsystem.model.Transaction;
 import com.felix.bankingsystem.controller.BankService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.LocalDateTime;
-
 
 public class WithdrawController {
 
@@ -46,8 +43,12 @@ public class WithdrawController {
     @FXML
     private Button Withdraw_btn;
 
+    @FXML
+    private TextField account_num_txt;
+
     private Customer customer;
     private BankService bankService;
+    private Account selectedAccount;
 
     @FXML
     private void initialize() {
@@ -87,45 +88,49 @@ public class WithdrawController {
     @FXML
     private void handleWithdraw() {
         try {
-            double amount = Double.parseDouble(withdraw_amount.getText().trim());
+            String accountNumber = account_num_txt.getText().trim();
+            if (accountNumber.isEmpty()) {
+                showAlert("Error", "Please enter the account number.");
+                return;
+            }
 
+            double amount = Double.parseDouble(withdraw_amount.getText().trim());
             if (amount <= 0) {
                 showAlert("Error", "Amount must be greater than 0");
                 return;
             }
 
-            // For simplicity, withdraw from first account
-            if (!customer.getAccounts().isEmpty()) {
-                Account selectedAccount = customer.getAccounts().get(0);
+            Account selectedAccount = customer.getAccounts().stream()
+                    .filter(acc -> acc.getAccountNumber().equalsIgnoreCase(accountNumber))
+                    .findFirst()
+                    .orElse(null);
 
-                // Check sufficient balance
-                if (selectedAccount.getBalance() < amount) {
-                    showAlert("Error", "Insufficient funds");
-                    return;
-                }
-
-                // Create transaction
-                Transaction transaction = new Transaction(
-                        "T" + System.currentTimeMillis(),
-                        "WITHDRAWAL",
-                        amount,
-                        selectedAccount.getBalance() - amount
-                );
-
-                // Update account balance
-                bankService.withdraw(customer, amount);
-                updateView();
-
-                showAlert("Success", String.format("Withdrawn P%.2f successfully", amount));
-                withdraw_amount.clear();
-                updateView();
-
-            } else {
-                showAlert("Error", "No accounts available for withdrawal");
+            if (selectedAccount == null) {
+                showAlert("Error", "Account number not found.");
+                return;
             }
+
+            if (selectedAccount.getBalance() < amount) {
+                showAlert("Error", "Insufficient funds in this account.");
+                return;
+            }
+
+            bankService.withdrawFromAccount(customer, selectedAccount, amount);
+
+            updateView();
+            bankService.saveAllData();
+
+            showAlert("Success", String.format("Withdrawn P%.2f from account %s successfully.",
+                    amount, selectedAccount.getAccountNumber()));
+
+            // Clear inputs
+            withdraw_amount.clear();
+            account_num_txt.clear();
 
         } catch (NumberFormatException e) {
             showAlert("Error", "Please enter a valid amount");
+        } catch (Exception e) {
+            showAlert("Error", "Withdrawal failed: " + e.getMessage());
         }
     }
 

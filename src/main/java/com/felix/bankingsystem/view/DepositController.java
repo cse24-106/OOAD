@@ -2,7 +2,6 @@ package com.felix.bankingsystem.view;
 
 import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.model.Account;
-import com.felix.bankingsystem.model.Transaction;
 import com.felix.bankingsystem.controller.BankService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,33 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.Comparator;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-
 
 public class DepositController {
 
     @FXML
     private Label Available_balance;
-
-    @FXML
-    private TableColumn<Transaction, Double> Dash_tranTable_amount;
-
-    @FXML
-    private TableColumn<Transaction, Double> Dash_tranTable_balance_after;
-
-    @FXML
-    private TableColumn<Transaction, String> Dash_tranTable_date;
-
-    @FXML
-    private TableColumn<Transaction, String> Dash_tranTable_tranID;
-
-    @FXML
-    private TableColumn<Transaction, String> Dash_tranTable_type;
-
-    @FXML
-    private TableView<Transaction> Dash_transactions_table;
 
     @FXML
     private TextField Dep_amount;
@@ -64,6 +41,9 @@ public class DepositController {
     private Button withdraw_btn;
 
     @FXML
+    private TextField account_num_txt;
+
+    @FXML
     private Button logout_btn;
 
     private Customer customer;
@@ -72,7 +52,6 @@ public class DepositController {
 
     @FXML
     private void initialize() {
-        setupTableColumns();
         setupButtonActions();
     }
 
@@ -83,14 +62,6 @@ public class DepositController {
 
     public void setBankService(BankService bankService) {
         this.bankService = bankService;
-    }
-
-    private void setupTableColumns() {
-        Dash_tranTable_tranID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTransactionID()));
-        Dash_tranTable_date.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
-        Dash_tranTable_type.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getType()));
-        Dash_tranTable_amount.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getAmount()).asObject());
-        Dash_tranTable_balance_after.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getBalanceAfter()).asObject());
     }
 
     @FXML
@@ -112,57 +83,48 @@ public class DepositController {
                     .sum();
             Available_balance.setText(String.format("P%.2f", totalBalance));
 
-            // Show deposit transactions
-            updateTransactionTable();
-        }
-    }
-
-    private void updateTransactionTable() {
-        if (customer != null) {
-            var depositTransactions = customer.getAccounts().stream()
-                    .flatMap(account -> account.getTransactions().stream())
-                    .filter(transaction -> "DEPOSIT".equals(transaction.getType()))
-                    .sorted(Comparator.comparing(Transaction::getDate).reversed())
-                    .toList();
-            Dash_transactions_table.getItems().setAll(depositTransactions);
         }
     }
 
     @FXML
     private void handleDeposit() {
         try {
-            double amount = Double.parseDouble(Dep_amount.getText().trim());
+            String accountNumber = account_num_txt.getText().trim();
+            if (accountNumber.isEmpty()) {
+                showAlert("Error", "Please enter the account number.");
+                return;
+            }
 
+            double amount = Double.parseDouble(Dep_amount.getText().trim());
             if (amount <= 0) {
                 showAlert("Error", "Amount must be greater than 0");
                 return;
             }
 
-            if (customer == null || customer.getAccounts().isEmpty()) {
-                showAlert("Error", "No accounts available for deposit");
+            Account selectedAccount = customer.getAccounts().stream()
+                    .filter(acc -> acc.getAccountNumber().equalsIgnoreCase(accountNumber))
+                    .findFirst()
+                    .orElse(null);
 
-                // Create transaction
-                Transaction transaction = new Transaction(
-                        "T" + System.currentTimeMillis(),
-                        "DEPOSIT",
-                        amount,
-                        selectedAccount.getBalance() + amount
-                );
-
-                // Update account balance
-                bankService.deposit(customer, amount);
-                updateView();
-
-                showAlert("Success", String.format("Deposited P%.2f successfully", amount));
-                Dep_amount.clear();
-                updateView();
-
-            } else {
-                showAlert("Error", "No accounts available for deposit");
+            if (selectedAccount == null) {
+                showAlert("Error", "Account number not found.");
+                return;
             }
 
+            bankService.depositIntoAccount(customer, selectedAccount, amount);
+
+            updateView();
+            bankService.saveAllData();
+
+            showAlert("Success", String.format("Deposited into account P%.2f %s successfully.",
+                    amount, selectedAccount.getAccountNumber()));
+
+            Dep_amount.clear();
+            account_num_txt.clear();
         } catch (NumberFormatException e) {
             showAlert("Error", "Please enter a valid amount");
+        } catch (Exception e) {
+            showAlert("Error", "Deposit failed: " + e.getMessage());
         }
     }
 
