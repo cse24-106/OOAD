@@ -57,6 +57,10 @@ public class DatabaseHandler {
                 }
             }
             System.out.println("Accounts saved to " + Accounts);
+            System.out.println("Saving " + customers.size() + " customers...");
+            for (Customer c : customers) {
+                System.out.println("Customer: " + c.getCustomerId() + " has " + c.getAccounts().size() + " accounts.");
+            }
         } catch (IOException e) {
             System.err.println("Error saving accounts: " + e.getMessage());
         }
@@ -139,8 +143,8 @@ public class DatabaseHandler {
                 if (c == null) continue;
 
                 Account acc = switch (type) {
-                    case "SavingsAccount" -> new SavingsAccount(accNum, c, 0);
-                    case "InvestmentAccount" -> new InvestmentAccount(accNum, c, 0);
+                    case "SavingsAccount" -> new SavingsAccount(accNum, c, Math.max(amount, 50));
+                    case "InvestmentAccount" -> new InvestmentAccount(accNum, c, Math.max(amount, 500));
                     case "ChequeAccount" -> new ChequeAccount(accNum, 0, c, "N/A", "N/A");
                     default -> null;
                 };

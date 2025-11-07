@@ -2,21 +2,21 @@ package com.felix.bankingsystem.controller;
 
 import com.felix.bankingsystem.model.Customer;
 import com.felix.bankingsystem.model.IndividualCustomer;
-
 import java.util.Map;
 
 public class Authenticator {
     private final String identifier;
     private final String password;
+    private final BankService bankService;
 
-    public Authenticator(String identifier, String password) {
+    public Authenticator(String identifier, String password, BankService bankService) {
         this.identifier = identifier;
         this.password = password;
+        this.bankService = bankService;
     }
 
     public Customer login() {
-        DatabaseHandler db = new DatabaseHandler();
-        Map<String, Customer> customers = db.loadCustomers();
+        Map<String, Customer> customers = bankService.getCustomers();
 
         // Try to find individual by email
         for (Customer c : customers.values()) {

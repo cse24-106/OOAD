@@ -12,39 +12,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class DepositController {
-
-    @FXML
-    private Label Available_balance;
-
-    @FXML
-    private TextField Dep_amount;
-
-    @FXML
-    private Button Deposit_btn;
-
-    @FXML
-    private Button dashboard_btn;
-
-    @FXML
-    private Button deposit_btn;
-
-    @FXML
-    private Button open_acc_btn;
-
-    @FXML
-    private Button pers_det_btn;
-
-    @FXML
-    private Button transaction_hist_btn;
-
-    @FXML
-    private Button withdraw_btn;
-
-    @FXML
-    private TextField account_num_txt;
-
-    @FXML
-    private Button logout_btn;
+    @FXML private Label Available_balance;
+    @FXML private TextField Dep_amount;
+    @FXML private Button Deposit_btn;
+    @FXML private Button dashboard_btn;
+    @FXML private Button deposit_btn;
+    @FXML private Button open_acc_btn;
+    @FXML private Button pers_det_btn;
+    @FXML private Button transaction_hist_btn;
+    @FXML private Button withdraw_btn;
+    @FXML private TextField account_num_txt;
+    @FXML private Button logout_btn;
 
     private Customer customer;
     private BankService bankService;

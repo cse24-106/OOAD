@@ -19,22 +19,16 @@ public class LoginController {
 
         @FXML
         private AnchorPane Login_pic;
-
         @FXML
         private Label error_message;
-
         @FXML
         private Button login_btn;
-
         @FXML
         private BorderPane login_screen;
-
         @FXML
         private PasswordField password_txt;
-
         @FXML
         private Hyperlink signup_hyper;
-
         @FXML
         private TextField username_txt;
 
@@ -59,15 +53,15 @@ public class LoginController {
 
         @FXML
         private void handleLogin(ActionEvent event) {
-                String identifier = username_txt.getText();
-                String password = password_txt.getText();
+                String identifier = username_txt.getText().trim();
+                String password = password_txt.getText().trim();
 
                 if(!validateInput(identifier, password)) {
                         return;
                 }
 
                 try {
-                        Authenticator auth = new Authenticator(identifier, password);
+                        Authenticator auth = new Authenticator(identifier, password, bankService);
                         Customer customer = auth.login();
 
                         if (customer != null) {

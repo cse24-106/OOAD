@@ -28,6 +28,9 @@ public abstract class Customer {
     }
 
     public void addAccount(Account account) {
+        if (accounts == null) {
+            accounts = new ArrayList<>();
+        }
         accounts.add(account);
     }
 

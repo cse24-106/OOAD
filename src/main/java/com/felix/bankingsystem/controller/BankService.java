@@ -18,6 +18,10 @@ public class BankService {
         System.out.println("BankService initialized. Customers loaded: " + customers.size());
     }
 
+    public Map<String, Customer> getCustomers() {
+        return customers;
+    }
+
     public void addCustomer(Customer customer) {
         customers.put(customer.getCustomerId(), customer);
         saveAllData();
@@ -77,6 +81,9 @@ public class BankService {
                 "Withdrew P" + amount + " from account " + account.getAccountNumber());
     }
 
+    public Customer getCustomerById(String id) {
+        return customers.get(id);
+    }
 
     public void saveAllData() {
         database.saveCustomers(customers.values());
