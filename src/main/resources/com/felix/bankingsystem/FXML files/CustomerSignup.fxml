@@ -12,23 +12,21 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.CustomerSignupController">
-   <BorderPane layoutX="200.0" layoutY="52.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0"
-               AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.felix.bankingsystem.view.CustomerSignupController">
+   <BorderPane layoutX="200.0" layoutY="52.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
       <top>
          <HBox alignment="CENTER" prefHeight="54.0" prefWidth="879.0" spacing="110.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-               <Insets/>
+               <Insets />
             </BorderPane.margin>
             <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="159.0" text="Capital Bank">
                <font>
-                  <Font name="System Bold" size="24.0"/>
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <Label prefHeight="35.0" prefWidth="260.0" text="Customer Registration">
                <font>
-                  <Font name="System Bold" size="24.0"/>
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </HBox>
@@ -36,94 +34,79 @@
       <center>
          <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-               <Insets bottom="10.0" left="10.0"/>
+               <Insets bottom="10.0" left="10.0" />
             </BorderPane.margin>
-            <Button fx:id="return_to_login_btn" layoutX="193.0" layoutY="467.0" mnemonicParsing="false"
-                    onAction="#returnToLogin" prefHeight="34.0" prefWidth="100.0" text="Return to Login"/>
-            <Button fx:id="signup_btn" layoutX="378.0" layoutY="467.0" mnemonicParsing="false"
-                    onAction="#handleSignup" prefHeight="34.0" prefWidth="100.0" text="Sign Up"/>
-            <GridPane alignment="CENTER" prefHeight="321.0" prefWidth="480.0"
-                      AnchorPane.bottomAnchor="79.20000000000005" AnchorPane.leftAnchor="193.0"
-                      AnchorPane.rightAnchor="194.20000000000005" AnchorPane.topAnchor="80.0">
+            <Button fx:id="return_to_login_btn" layoutX="193.0" layoutY="467.0" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="34.0" prefWidth="100.0" text="Return to Login" />
+            <Button fx:id="signup_btn" defaultButton="true" layoutX="378.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleSignup" prefHeight="34.0" prefWidth="100.0" text="Sign Up" />
+            <GridPane alignment="CENTER" prefHeight="321.0" prefWidth="480.0" AnchorPane.bottomAnchor="79.20000000000005" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="194.20000000000005" AnchorPane.topAnchor="80.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <TextField fx:id="nationalID_txt" layoutX="110.0" layoutY="25.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="3">
+               <TextField fx:id="nationalID_txt" layoutX="110.0" layoutY="25.0" promptText="NID123456" GridPane.columnIndex="1" GridPane.rowIndex="3">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <Label text="Firstname: " GridPane.rowIndex="1"/>
-               <Label layoutX="10.0" layoutY="28.0" text="Surname:" GridPane.rowIndex="2"/>
-               <Label layoutX="10.0" layoutY="83.0" text="National ID:" GridPane.rowIndex="3"/>
-               <TextField fx:id="surname_txt" layoutX="10.0" layoutY="25.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="2">
+               <Label text="Firstname: " GridPane.rowIndex="1" />
+               <Label layoutX="10.0" layoutY="28.0" text="Surname:" GridPane.rowIndex="2" />
+               <Label layoutX="10.0" layoutY="83.0" text="National ID:" GridPane.rowIndex="3" />
+               <TextField fx:id="surname_txt" layoutX="10.0" layoutY="25.0" promptText="Doe" GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <Label layoutX="10.0" layoutY="80.0" text="Customer ID:"/>
-               <Label layoutX="10.0" layoutY="281.0" prefHeight="22.0" prefWidth="86.0" text="Phone number:"
-                      GridPane.rowIndex="5"/>
-               <TextField fx:id="number_txt" layoutX="444.0" layoutY="277.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="5">
+               <Label layoutX="10.0" layoutY="80.0" text="Customer ID:" />
+               <Label layoutX="10.0" layoutY="281.0" prefHeight="22.0" prefWidth="86.0" text="Phone number:" GridPane.rowIndex="5" />
+               <TextField fx:id="number_txt" layoutX="444.0" layoutY="277.0" promptText="1234567" GridPane.columnIndex="1" GridPane.rowIndex="5">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <Label layoutX="10.0" layoutY="440.0" prefHeight="22.0" prefWidth="66.0" text="Address:"
-                      GridPane.rowIndex="4"/>
-               <TextField fx:id="address_txt" layoutX="444.0" layoutY="438.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="4">
+               <Label layoutX="10.0" layoutY="440.0" prefHeight="22.0" prefWidth="66.0" text="Address:" GridPane.rowIndex="4" />
+               <TextField fx:id="address_txt" layoutX="444.0" layoutY="438.0" promptText="123Street" GridPane.columnIndex="1" GridPane.rowIndex="4">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <Label layoutX="10.0" layoutY="378.0" prefHeight="22.0" prefWidth="66.0" text="Email:"
-                      GridPane.rowIndex="6"/>
-               <TextField fx:id="email_txt" layoutX="444.0" layoutY="376.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="6">
+               <Label layoutX="10.0" layoutY="378.0" prefHeight="22.0" prefWidth="66.0" text="Email:" GridPane.rowIndex="6" />
+               <TextField fx:id="email_txt" layoutX="444.0" layoutY="376.0" promptText="example@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="6">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <Label fx:id="CustomerID" layoutX="10.0" layoutY="33.0" text="Customer ID:"
-                      GridPane.columnIndex="1"/>
-               <Label layoutX="10.0" layoutY="252.0" prefHeight="22.0" prefWidth="86.0" text="Source of funds:"
-                      GridPane.rowIndex="7"/>
-               <TextField fx:id="source_of_funds_txt" layoutX="250.0" layoutY="259.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="7">
+               <Label fx:id="CustomerID" layoutX="10.0" layoutY="33.0" text="Customer ID:" GridPane.columnIndex="1">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets left="10.0" />
+                  </GridPane.margin></Label>
+               <Label layoutX="10.0" layoutY="252.0" prefHeight="22.0" prefWidth="86.0" text="Source of funds:" GridPane.rowIndex="7" />
+               <TextField fx:id="source_of_funds_txt" layoutX="250.0" layoutY="259.0" promptText="Salary" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <GridPane.margin>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <TextField fx:id="firstname_txt" prefHeight="16.0" prefWidth="240.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="1">
+               <TextField fx:id="firstname_txt" prefHeight="16.0" prefWidth="240.0" promptText="John" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <TextField fx:id="password_txt" layoutX="261.0" layoutY="293.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="8">
+               <TextField fx:id="password_txt" layoutX="261.0" layoutY="293.0" promptText="******" GridPane.columnIndex="1" GridPane.rowIndex="8">
                   <GridPane.margin>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </GridPane.margin>
                </TextField>
-               <Label layoutX="10.0" layoutY="295.0" prefHeight="22.0" prefWidth="86.0" text="Password:"
-                      GridPane.rowIndex="8"/>
+               <Label layoutX="10.0" layoutY="295.0" prefHeight="22.0" prefWidth="86.0" text="Password:" GridPane.rowIndex="8" />
             </GridPane>
          </AnchorPane>
       </center>
