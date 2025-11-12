@@ -95,7 +95,7 @@ public class TransactionHistoryController {
                     .flatMap(account -> account.getTransactions().stream())
                     .sorted(Comparator.comparing(Transaction::getDate).reversed())
                     .toList();
-            Dash_transactions_table.getItems().setAll(allTransactions);
+            Dash_transactions_table.getItems().setAll((Transaction[]) allTransactions);
         }
     }
 
