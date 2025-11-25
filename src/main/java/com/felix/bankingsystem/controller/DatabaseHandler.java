@@ -13,7 +13,9 @@ public class DatabaseHandler {
     public void saveCustomers(Collection<Customer> customers) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Customers_Details))) {
             for (Customer c : customers) {
-                if (c instanceof IndividualCustomer ic) {
+                if (c instanceof IndividualCustomer) {
+                    IndividualCustomer ic = (IndividualCustomer) c;
+
                     writer.write(String.format("IND,%s,%s,%s,%s,%s,%s,%s,%s,%s",
                             ic.getCustomerId(),
                             ic.getFirstName(),
@@ -24,7 +26,9 @@ public class DatabaseHandler {
                             ic.getEmail(),
                             ic.getSourceOfFunds(),
                             ic.getPassword()));
-                } else if (c instanceof CompanyCustomer cc) {
+                } else if (c instanceof CompanyCustomer) {
+                    CompanyCustomer cc = (CompanyCustomer) c;
+
                     writer.write(String.format("ORG,%s,%s,%s,%s,%s,%s,%s,%s,%s",
                             cc.getCustomerId(),
                             cc.getCompanyName(),
@@ -142,11 +146,24 @@ public class DatabaseHandler {
                 Customer c = customers.get(customerId);
                 if (c == null) continue;
 
-                Account acc = switch (type) {
-                    case "SavingsAccount" -> new SavingsAccount(accNum, c, Math.max(amount, 50));
-                    case "InvestmentAccount" -> new InvestmentAccount(accNum, c, Math.max(amount, 500));
-                    case "ChequeAccount" -> new ChequeAccount(accNum, 0, c, "N/A", "N/A");
-                    default -> null;
+                Account acc = null;
+                
+                switch (type) {
+                    case "SavingsAccount":
+                        acc = new SavingsAccount(accNum, c, Math.max(amount, 50));
+                        break;
+
+                    case "InvestmentAccount":
+                        acc = new InvestmentAccount(accNum, c, Math.max(amount, 500));
+                        break;
+
+                    case "ChequeAccount":
+                        acc = new ChequeAccount(accNum, 0, c, "N/A", "N/A");
+                        break;
+
+                    default:
+                        acc =  null;
+                        break;
                 };
                 if (acc != null) {
                     acc.deposit(amount);

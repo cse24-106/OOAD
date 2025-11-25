@@ -87,7 +87,9 @@ public class PersonalDetailsController {
             // Update customer details
             CustomerID.setText(customer.getCustomerId());
 
-            if (customer instanceof IndividualCustomer indCustomer) {
+            if (customer instanceof IndividualCustomer) {
+                IndividualCustomer indCustomer = (IndividualCustomer) customer;
+
                 firstname_txt.setText(indCustomer.getFirstName());
                 surname_txt.setText(indCustomer.getSurname());
                 nationalID_txt.setText(indCustomer.getNationalID());
@@ -97,7 +99,9 @@ public class PersonalDetailsController {
                 source_of_funds_txt.setText(indCustomer.getSourceOfFunds());
                 conatct_person_txt.setText("N/A");
 
-            } else if (customer instanceof CompanyCustomer compCustomer) {
+            } else if (customer instanceof CompanyCustomer) {
+                CompanyCustomer compCustomer = (CompanyCustomer) customer;
+
                 firstname_txt.setText(compCustomer.getCompanyName());
                 surname_txt.setText("N/A");
                 nationalID_txt.setText(compCustomer.getRegistrationNumber());
