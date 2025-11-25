@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import java.util.stream.Collectors;
 
 import java.io.IOException;
 import java.util.List;
@@ -113,7 +114,7 @@ public class DashboardController {
         // Update transaction table
         List<Transaction> transactions = accounts.stream()
                 .flatMap(acc -> acc.getTransactions().stream())
-                .toList();
+                .collect(Collectors.toList());
         Dash_transactions_table.getItems().setAll(transactions);
     }
 

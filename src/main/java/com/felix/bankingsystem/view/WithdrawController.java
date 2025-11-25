@@ -48,8 +48,7 @@ public class WithdrawController {
 
     private Customer customer;
     private BankService bankService;
-    private Account selectedAccount;
-
+    
     @FXML
     private void initialize() {
         setupButtonActions();

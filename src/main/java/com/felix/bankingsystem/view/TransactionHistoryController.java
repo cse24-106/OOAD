@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 
 public class TransactionHistoryController {
@@ -94,8 +95,8 @@ public class TransactionHistoryController {
             var allTransactions = customer.getAccounts().stream()
                     .flatMap(account -> account.getTransactions().stream())
                     .sorted(Comparator.comparing(Transaction::getDate).reversed())
-                    .toList();
-            Dash_transactions_table.getItems().setAll((Transaction[]) allTransactions);
+                    .collect(Collectors.toList());
+            Dash_transactions_table.getItems().setAll(allTransactions);
         }
     }
 
